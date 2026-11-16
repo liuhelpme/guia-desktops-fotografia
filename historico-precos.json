@@ -113,5 +113,36 @@
         "savings": 5831.02
       }
     ]
+  },
+  {
+    "date": "2026-11-16",
+    "type": "novos-perfis-2026",
+    "note": "4 novas montagens técnicas; preços pesquisados por SKU nas páginas das lojas e peças de referência histórica; não são cotações de PC montado. Os 18 perfis anteriores foram preservados.",
+    "profiles": [
+      {
+        "id": "am5-2026-1",
+        "original": 4919.93,
+        "alternative": 4919.93,
+        "savings": 0
+      },
+      {
+        "id": "am5-2026-2",
+        "original": 7419.92,
+        "alternative": 7419.92,
+        "savings": 0
+      },
+      {
+        "id": "am5-2026-3",
+        "original": 12099.91,
+        "alternative": 12099.91,
+        "savings": 0
+      },
+      {
+        "id": "intel-2026-1",
+        "original": 8518.03,
+        "alternative": 8518.03,
+        "savings": 0
+      }
+    ]
   }
 ]

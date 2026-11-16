@@ -98,3 +98,14 @@ Foram consultados MEUPC.NET (montagem/compartilhamento/avisos), Pichau (começar
 - Salvamento é local; JSON/CSV/impressão e compartilhamento preservam os avisos de preço, sem prometer compatibilidade completa.
 - Modais e páginas em larguras de 320, 390 e 1440 px não podem ter rolagem horizontal; não pode haver exceções JavaScript.
 - Mudanças em instruções ou fontes não alteram números de preço já pesquisados sem nova confirmação.
+
+
+## Atualização editorial — novos perfis + navegação responsiva (16/11/2026)
+
+O site passou de 18 para **22 perfis**, sem excluir os 18 originais. Quatro configurações novas foram propostas: Ryzen 5 9600X com vídeo integrado básico, Ryzen 5 9600X com RTX 5060 8 GB, Ryzen 7 9700X com RTX 5060 Ti 16 GB e Intel Core Ultra 7 265K com RTX 5060 8 GB. Elas aparecem com selo **Novo · 2026** e filtro específico, e podem ser personalizadas, comparadas, salvas e exportadas no montador. Os preços completos de peças + R$ 250 (referência de montagem) estão em `data.json`, em `orcamentos-completos.csv` e `historico-precos.json`.
+
+**Origem e limitações:** pesquisa direta em páginas de CPU/GPU/RAM/placa-mãe/SSD/fonte da TerabyteShop e Pichau em 16/11/2026. Peças sem cotação específica atual (alguns coolers, gabinetes, placas-mãe e CPU Intel) receberam **valor de referência histórico identificado em cada linha**. Não afirmar que todos os componentes estão disponíveis, que o preço é de checkout ou que a montagem está 100% validada. Confira BIOS AM5 para Ryzen 9000, cooler compatível, fonte/conectores e gabinete; GPU integrada do 9600X não substitui placa de vídeo para IA intensiva.
+
+**Navegação:** menu hambúrguer real com botão e `aria-expanded` até 850 px, fecha ao selecionar item, clicar fora, pressionar Esc ou expandir a janela. Botão flutuante **↑ Topo** aparece depois de rolar 500 px, com suporte a redução de movimento. Desktops mantêm menu horizontal.
+
+Referências técnicas: [Puget - Lightroom Classic](https://www.pugetsystems.com/solutions/content-creation/adobe-lightroom-classic/hardware-recommendations), [Puget - Photoshop](https://www.pugetsystems.com/solutions/photo-editingworkstations/adobe-photoshop/hardware-recommendations/). Páginas exatas dos componentes estão em cada `pricing.items[].url`.
