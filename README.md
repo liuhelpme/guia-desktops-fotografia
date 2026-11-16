@@ -62,3 +62,19 @@ A primeira modernização acrescentou **seis peças alternativas** ao catálogo 
 **Critério de publicação semanal**: não confundir preços de pesquisa com estoque; registrar URL exata, SKU, data e divergências; preservar perfis antigos; rejeitar mudanças sem compatibilidade ou sem QA; disponibilizar relatório de alterações, histórico e fonte.
 
 **Fontes técnicas atualizadas:** Adobe Lightroom Classic 16.0, versão novembro/2026: https://helpx.adobe.com/br/lightroom-classic/desktop/introduction-to-lightroom-classic/system-requirements.html. O Lightroom recomenda **8GB de VRAM dedicada ou 16GB de memória compartilhada para IA plenamente acelerada**, 16GB ou mais RAM e SSD rápido; no guia, a recomendação operacional de 32GB RAM para RAW permanece.
+
+
+## Montador de perfis personalizado (edição em 16/11/2026)
+
+- Em qualquer um dos 18 perfis, clique **Personalizar**; também é possível abrir pelo detalhamento do PC.
+- Troque CPU, placa-mãe, RAM, SSD, GPU, fonte, cooler e gabinete pelos modelos do catálogo; edite o nome, quantidade, valor unitário, link de referência e custo de montagem. As contas mudam **imediatamente no navegador**.
+- Preços dos anúncios são **pesquisas com data**, não preços ao vivo: `data.json` traz a última revisão editorial. O botão **Recarregar preços publicados** busca novamente o JSON do site e atualiza o preço dos produtos selecionados do catálogo, exceto alterações manuais. Ele **não consulta diretamente o checkout das lojas**.
+- O alerta automático de socket e DDR é preliminar; confirme BIOS, QVL, fonte, medidas e conectores com os fabricantes. Caso haja item sem preço, o total é exibido como **Preço pendente**, não falsamente como custo completo.
+- **Salvar no navegador** usa `localStorage` (até 30 perfis por navegador, sem cadastro). **Compartilhar** utiliza um link que carrega o próprio perfil, incluindo valores informados. **Baixar** gera JSON (backup / transferência) ou CSV (orçamento), ou abre a impressão para salvar em PDF. Sem coleta de dados pessoais em servidor.
+- Importar JSON é possível em **Meus perfis**; a importação valida o formato e os oito grupos de peças.
+- Fonte de pesquisa adicional: [SeuHardware](https://seuhardware.com/), com links específicos para as oito categorias. Como o SeuHardware se define como plataforma de publicidade e não loja, a referência é editorial; comprador deve conferir preço, SKU, vendedor e estoque no varejista.
+
+### Testes sugeridos
+
+- Desktop 1440 px, tablet 768 px, celular 390 px e 320 px: abrir montador, alterar CPU/RAM, mudar quantidades, verificar recálculo e avisos, salvar, reabrir, importar/exportar JSON e CSV, compartilhar link e conferir acessibilidade do diálogo.
+- Nenhuma mudança no banco, no servidor ou nas ofertas históricas para suportar esta funcionalidade; projeto permanece estático e gratuito.
