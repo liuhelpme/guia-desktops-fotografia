@@ -1,0 +1,117 @@
+[
+  {
+    "date": "2026-11-16",
+    "type": "primeira-revisao-semanal",
+    "note": "Cenários de custo original e otimizado por 6 itens; nenhum preço anterior reescrito; revisão manual de SKUs nas páginas Pichau.",
+    "profiles": [
+      {
+        "id": "am4-1",
+        "original": 9744.98,
+        "alternative": 5915.07,
+        "savings": 3829.91
+      },
+      {
+        "id": "am4-2",
+        "original": 8935.12,
+        "alternative": 6636.8,
+        "savings": 2298.32
+      },
+      {
+        "id": "am4-3",
+        "original": 17345.45,
+        "alternative": 10097.63,
+        "savings": 7247.82
+      },
+      {
+        "id": "am4-4",
+        "original": 7178.64,
+        "alternative": 3348.73,
+        "savings": 3829.91
+      },
+      {
+        "id": "am4-5",
+        "original": 11006.66,
+        "alternative": 4538.74,
+        "savings": 6467.92
+      },
+      {
+        "id": "am4-6",
+        "original": 12805.55,
+        "alternative": 5557.73,
+        "savings": 7247.82
+      },
+      {
+        "id": "am5-1",
+        "original": 11058.58,
+        "alternative": 6578.58,
+        "savings": 4480.0
+      },
+      {
+        "id": "am5-2",
+        "original": 21699.83,
+        "alternative": 12059.83,
+        "savings": 9640.0
+      },
+      {
+        "id": "am5-3",
+        "original": 23029.83,
+        "alternative": 13389.83,
+        "savings": 9640.0
+      },
+      {
+        "id": "am5-4",
+        "original": 9248.58,
+        "alternative": 4768.58,
+        "savings": 4480.0
+      },
+      {
+        "id": "am5-5",
+        "original": 18019.93,
+        "alternative": 8379.93,
+        "savings": 9640.0
+      },
+      {
+        "id": "am5-6",
+        "original": 18179.93,
+        "alternative": 8539.93,
+        "savings": 9640.0
+      },
+      {
+        "id": "intel-1",
+        "original": 8208.93,
+        "alternative": 7494.66,
+        "savings": 714.27
+      },
+      {
+        "id": "intel-2",
+        "original": 14664.76,
+        "alternative": 9806.74,
+        "savings": 4858.02
+      },
+      {
+        "id": "intel-3",
+        "original": 18642.71,
+        "alternative": 12811.69,
+        "savings": 5831.02
+      },
+      {
+        "id": "intel-4",
+        "original": 5328.62,
+        "alternative": 4614.35,
+        "savings": 714.27
+      },
+      {
+        "id": "intel-5",
+        "original": 6598.25,
+        "alternative": 5079.83,
+        "savings": 1518.42
+      },
+      {
+        "id": "intel-6",
+        "original": 11369.06,
+        "alternative": 5538.04,
+        "savings": 5831.02
+      }
+    ]
+  }
+]

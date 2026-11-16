@@ -31,3 +31,21 @@
 .audit-link span{flex:1;font-size:12px;color:#617079;min-width:220px;line-height:1.6}
 .audit-link a{background:#fff;color:#1f3348;border:1px solid #ced5d9}
 @media(max-width:580px){.results-tools{width:100%;justify-content:space-between;gap:7px}.results-tools select{max-width:145px}.budget-table{min-width:670px}.budget-table th,.budget-table td{padding:10px 7px}.audit-link{align-items:flex-start;flex-direction:column}.audit-link span{min-width:0}}
+
+/* Revisão editorial 16/11/2026: cenários alternativos, datas e rastreabilidade */
+.weekly-banner{display:flex;align-items:center;gap:17px;padding:20px 22px;background:#eaf1ee;border:1px solid #cddcd5;border-radius:9px;margin-top:19px;margin-bottom:15px;color:#234638}
+.weekly-banner .weekly-mark{font-size:26px;font-weight:900;color:#287354;line-height:1}
+.weekly-banner div{flex:1;min-width:0}
+.weekly-banner strong{font-size:13px}
+.weekly-banner p{font-size:11px;color:#4f695d;line-height:1.55;margin:4px 0 0}
+.weekly-banner a{font-size:11px;flex-shrink:0;color:#287354;font-weight:700;text-decoration:underline}
+.alternative-mini{margin-top:15px;padding:13px 14px;background:#e8f3ed;border:1px solid #c9e0d1;border-radius:7px;display:flex;flex-direction:column;gap:4px;color:#164c34}
+.alt-label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;font-weight:800;display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between}
+.alt-label span{font-weight:500;letter-spacing:0;color:#62766c}
+.alternative-mini strong{font-size:25px;letter-spacing:-.035em}
+.alternative-mini small{font-size:10px;line-height:1.6;color:#456b54}
+.alt-summary{background:#e8f3ed;border-left-color:#287354}
+.alternative-section .budget-table{min-width:800px}
+.alternative-section .budget-table td:nth-child(3){min-width:260px}
+.alternative-section .budget-table td:nth-child(4){white-space:nowrap}
+@media(max-width:720px){.weekly-banner{padding:15px;align-items:flex-start;gap:11px;flex-wrap:wrap}.weekly-banner a{margin-left:35px}.alternative-mini strong{font-size:21px}}
