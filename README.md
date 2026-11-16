@@ -78,3 +78,23 @@ A primeira modernização acrescentou **seis peças alternativas** ao catálogo 
 
 - Desktop 1440 px, tablet 768 px, celular 390 px e 320 px: abrir montador, alterar CPU/RAM, mudar quantidades, verificar recálculo e avisos, salvar, reabrir, importar/exportar JSON e CSV, compartilhar link e conferir acessibilidade do diálogo.
 - Nenhuma mudança no banco, no servidor ou nas ofertas históricas para suportar esta funcionalidade; projeto permanece estático e gratuito.
+
+## UX para pessoas iniciantes — revisão de novembro de 2026
+
+O site foi organizado para que cada função responda: **onde estou**, **o que posso fazer aqui** e **o que acontece depois de clicar**. A área **“Não entende de peças? Escolha pelo que você faz”** traz quatro situações usuais de fotografia e aponta um perfil existente, sempre com **recomendação técnica, motivo estratégico, vantagem, desvantagem e próximo passo**. A orientação principal para uma compra nova é AM5 básico com Ryzen 5 7600 + RX 7600 por equilíbrio e opções de atualização; depende de comparar preço total e não é uma promessa de compatibilidade ou disponibilidade.
+
+O montador mantém as oito categorias e o cálculo no navegador, com textos explicativos simples por peça (para que serve, vantagem, desvantagem e o que recomendamos), estados informativos após trocar, guardar e compartilhar, confirmação antes de redefinir ou excluir, e alerta de que verificações automáticas de compatibilidade são **preliminares**. A opção `Meu próprio modelo / valor` foi renomeada para **Adicionar outra peça ou informar preço manualmente**. Valores de lojas não são cotações ao vivo e alterações manuais são identificadas.
+
+O comparador mostra plataforma e nível, e os cartões explicam para quem a configuração é indicada e o que deve ser conferido. Filtros usam termos simples, mantendo as informações avançadas acessíveis. Controles de navegação, seleção e estados usam HTML semântico, foco visível e atualizações de status.
+
+### Pesquisa externa e referências de organização
+
+Foram consultados MEUPC.NET (montagem/compartilhamento/avisos), Pichau (começar pela necessidade), TecnoArt Hardware (listas recomendadas por categoria), TerabyteShop (configuração/montagem), SeuHardware (preço e categoria), além de Magalu, KaBuM e Oficina dos Bits para organização de pesquisa e categorias. Os demais links encaminhados pelo usuário, Gigantec, Mercado Livre e Amazon Brasil, foram cadastrados como **atalhos de busca**, sem tratar páginas com restrição de acesso como ofertas verificadas. Todos os 11 links estão no bloco “Onde comparar preços e aprender mais”. Sempre verificar URL, SKU, vendedor, forma de pagamento, frete, devolução e estoque antes de adicionar um preço à base. Nunca extrair preços em tempo real sem uma integração oficial autorizada.
+
+### Verificações de interface antes de publicar
+
+- O assistente por necessidade escolhe perfil existente, atualiza o botão selecionado e permite abrir o detalhe ou personalizar sem compra.
+- As oito peças possuem explicações acessíveis e seus valores recalculam após troca ou edição.
+- Salvamento é local; JSON/CSV/impressão e compartilhamento preservam os avisos de preço, sem prometer compatibilidade completa.
+- Modais e páginas em larguras de 320, 390 e 1440 px não podem ter rolagem horizontal; não pode haver exceções JavaScript.
+- Mudanças em instruções ou fontes não alteram números de preço já pesquisados sem nova confirmação.
