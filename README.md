@@ -12,7 +12,6 @@ No diretório do projeto, execute `python -m http.server 8080` e abra http://loc
 - `styles.css`: responsividade e identidade visual.
 - `app.js`: filtros, busca, detalhes de componentes, comparador (até 3 PCs), paginação e fontes.
 - `data.json`: 18 perfis, 63 modelos, 109 ofertas e 189 atalhos de canais complementares, incluindo registros pendentes.
-- `build_data.py`: processamento reproduzível da planilha e do relatório fornecidos neste trabalho. Requer as exportações `xlsx_data.json` e `docx_2.json` geradas durante a análise; não é necessário para executar o site.
 
 ## Limites dos dados
 
@@ -30,8 +29,8 @@ Guia independente, não afiliado às lojas. Antes de comprar, confirmar SKU, ven
 
 Este repositório é a fonte de código do site **Estação RAW**, com implantação automática em Vercel mediante conexão GitHub.
 
-Projeto: https://vercel.com/liuhelpme-4965s-projects/guia-desktops-fotografia
-Site: https://guia-desktops-fotografia.vercel.app
+Projeto Git conectado: https://vercel.com/liuhelpme-4965s-projects/estacao-raw
+Site: https://estacao-raw.vercel.app
 
 ## Atualizações
 
