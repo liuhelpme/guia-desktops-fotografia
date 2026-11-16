@@ -8,14 +8,26 @@ No diretório do projeto, execute `python -m http.server 8080` e abra http://loc
 
 ## Conteúdo
 
-- `index.html`: conteúdo acessível e metadados SEO.
-- `styles.css`: responsividade e identidade visual.
-- `app.js`: filtros, busca, detalhes de componentes, comparador (até 3 PCs), paginação e fontes.
-- `data.json`: 18 perfis, 63 modelos, 109 ofertas e 189 atalhos de canais complementares, incluindo registros pendentes.
+- `index.html`: conteúdo, acessibilidade, SEO, ordenação por preço e metodologia.
+- `styles.css`: identidade visual e responsividade.
+- `app.js`: busca, filtros, detalhe dos custos de cada montagem, comparador e links.
+- `data.json`: os 18 perfis, 63 componentes, 109 ofertas históricas e **orçamentos completos com fontes por item**.
+- `orcamentos-completos.csv`: auditoria de todas as peças, preços, quantidades, origem, critérios de estimativa e total dos 18 PCs.
+- `favicon.svg`: identidade do site.
 
-## Limites dos dados
+## Como interpretar os preços (atualização 16/11/2026)
 
-Pesquisa de ofertas em **02/11/2026**. Não são valores ao vivo. Nenhuma das 18 configurações está 100% precificada. Os valores de subtotal refletem só os componentes confirmados, e a cobertura aparece nos cartões. Nenhum preço foi estimado para suprir lacunas. As pesquisas complementares em Shopee, Mercado Livre e Google Shopping estavam interrompidas; os links correspondentes são somente atalhos de busca. Os dois documentos Word apresentam guias técnicos e registros históricos anteriores, não sendo mesclados aos preços da planilha.
+A antiga visualização de subtotais parciais foi substituída por **orçamento completo de cada PC**, incluindo os oito grupos de componentes (vídeo integrado e cooler incluso aparecem a R$ 0) e **R$ 250 de referência de montagem e testes**. O valor do serviço se baseia em preço publicado por prestador brasileiro; pode variar conforme loja e escopo.
+
+Os valores foram montados a partir de três situações claramente diferenciadas no detalhe dos perfis:
+
+1. **Preço pesquisado**: anúncio de varejo ou comparador consultado para novembro de 2026, com produto identificado.
+2. **Oferta da pesquisa de 02/11**: cotação validada na planilha fornecida, preservada como referência histórica, sem garantia de preço atual.
+3. **Referência / estimativa**: produto fora de estoque, preço mais antigo, classe equivalente ou combinação de módulos equivalentes. Cada hipótese e fonte estão identificadas na linha da peça.
+
+**Todas as oito linhas de custo de cada perfil estão preenchidas, mas isso NÃO significa que todos os SKUs estejam em estoque, que haja oito ofertas atuais validadas, ou que uma loja venda o conjunto pelo total apresentado.** A pesquisa não é atualizada automaticamente. Preço final exige conferência de vendedor, disponibilidade, CEP e forma de pagamento. Não estão incluídos frete, licenças Windows/software, periféricos, monitores e dispositivos de backup. Valores são **estimativas de custo, não cotações fechadas**.
+
+**Notas específicas**: no AM5 básico o Ryzen 5 7600 BOX inclui cooler e o AK400 é opcional, por isso o cooler padrão acrescenta R$ 0 ao total. Em AM4 avançado existem **dois SSDs** de 1TB, e ambos foram somados. Em APU Intel/AMD a GPU é integrada e não requer compra separada. Em configurações com peças raras, sobretudo placas de vídeo antigas e módulos DDR5 64 GB, o preço referencial pode diferir substancialmente de uma oferta disponível.
 
 ## Hospedagem
 
@@ -29,9 +41,9 @@ Guia independente, não afiliado às lojas. Antes de comprar, confirmar SKU, ven
 
 Este repositório é a fonte de código do site **Estação RAW**, com implantação automática em Vercel mediante conexão GitHub.
 
-Projeto Git conectado: https://vercel.com/liuhelpme-4965s-projects/estacao-raw
+Projeto: https://vercel.com/liuhelpme-4965s-projects/estacao-raw
 Site: https://estacao-raw.vercel.app
 
 ## Atualizações
 
-Para renovar os preços, gerar uma nova versão verificada dos dados e atualizar `data.json`; não apresentar os preços históricos como tempo real.
+Para renovar os preços, revisar cada `profiles[].pricing.items[]` em `data.json`, preservar as fontes e `date`, recalcular `partsTotal` e `completeTotal` e regenerar `orcamentos-completos.csv`. Não converter preços históricos ou proxies em ofertas atuais sem verificação.
