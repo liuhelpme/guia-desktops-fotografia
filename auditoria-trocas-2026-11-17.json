@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-17",
+  "changesByCategory": {
+    "Placa-mãe": 4,
+    "Memória RAM": 12,
+    "Gabinete": 22
+  },
+  "affectedProfiles": 22,
+  "totalProfiles": 22,
+  "addedProducts": 9,
+  "distinctOriginalLinks": 140,
+  "notFullyVerified": "Ainda não há verificação individual de todas URLs da base; 27 URL da amostragem anterior. Esta etapa avaliou links problemáticos conhecidos, encontrou substituições por páginas específicas e notou anúncios antigos esgotados. Não afirmar estoque para todas as opções.",
+  "newExternalReferences": {
+    "hs01": "https://www.terabyteshop.com.br/produto/37129/gabinete-gamer-montech-hs01-pro-argb-mid-tower-atx-sem-fonte-com-5-fans-preto",
+    "dk360": "https://www.pichau.com.br/gabinete-gamer-aigo-darkflash-dk360-mesh-mid-tower-lateral-de-vidro-com-3-fans-preto-dk360-mesh-3f",
+    "b550": "https://www.pichau.com.br/placa-mae-msi-b550m-pro-vdh-wifi-ddr4-socket-am4-chipset-amd-b550-b550m-pro-vdh-wifi",
+    "cypher": "https://www.pichau.com.br/gabinete-gamer-pichau-cypher-mid-tower-lateral-de-vidro-preto-pch-cph-bk",
+    "paste1": "https://www.pichau.com.br/pasta-termica-cooler-master-mastergel-regular-mgx-zosg-n15m-r2",
+    "paste2": "https://www.pichau.com.br/pasta-termica-cooler-master-cryofuze-2g-mgz-ndsg-n07m-r2",
+    "lexar": "https://www.pichau.com.br/ssd-lexar-nm790-1tb-m-2-2280-pcie-nvme-leitura-7400mb-s-gravacao-6500mb-s-lnm790x001t-rnnng",
+    "sata2": "https://www.pichau.com.br/ssd-sandisk-plus-2tb-2-5-sata-iii-6gb-s-leitura-545mb-s-gravacao-515-mbs-sdssda-2t00-g28",
+    "adata": "https://www.pichau.com.br/ssd-adata-legend-860-1tb-m-2-2280-pcie-nvme-leitura-6000-mb-s-gravacao-4000-mb-s-sleg-860-1000gcs",
+    "ddr4_3600": "https://www.pichau.com.br/memoria-kingston-fury-beast-rgb-32gb-2x16gb-ddr4-3600mhz-c18-preto-kf436c18bb2ak2-32"
+  },
+  "disclaimers": [
+    "Preço exibido e produto disponível são estados diferentes",
+    "Produtos removidos dos perfis permanecem em observações e histórico",
+    "Novas alternativas no catálogo exigem compatibilidade de plataforma, slot NVMe/SATA, encaixes e espaço do gabinete",
+    "Cooler BOX só custa R$0 se acompanha o processador; pasta térmica é opcional se pré-aplicada"
+  ]
+}

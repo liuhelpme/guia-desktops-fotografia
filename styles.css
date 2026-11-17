@@ -235,3 +235,12 @@
 .builder-suggest-item small{display:block;font-size:9px;color:#6a7d73}
 .builder-suggest-item button{background:#257953;color:#fff;border:0;border-radius:6px;font-size:10px;min-height:35px;font-weight:800;padding:8px 10px;flex-shrink:0;max-width:145px}
 @media(max-width:580px){.builder-suggest-item{flex-wrap:wrap;gap:5px}.builder-suggest-item button{width:100%;max-width:none}}
+
+/* Ações de salvar/baixar perfil visíveis em cada cartão e detalhe. */
+.profile-card .card-actions button[data-save-profile],.profile-card .card-actions button[data-download-profile]{flex:1 1 calc(50% - 7px);min-height:44px;font-weight:800;border:1px solid #c8d9d1;background:#edf7f2;color:#245a48}
+.profile-card .card-actions button[data-save-profile]:hover,.profile-card .card-actions button[data-download-profile]:hover{background:#d8efe4}
+.profile-save-cta,.profile-download-cta{margin:8px 5px 0 0;background:#eef8f1!important;color:#23624d!important;border-color:#a7d2bc!important}
+.previous-models{border:1px solid #dfebd6;background:#f9fdf7;padding:15px;border-radius:9px}
+.previous-models ul{padding-left:18px;line-height:1.75;color:#344f45;font-size:13px}
+.previous-models li+li{margin-top:7px}
+@media(max-width:480px){.profile-card .card-actions button[data-save-profile],.profile-card .card-actions button[data-download-profile]{flex:1 1 calc(50% - 7px);min-width:0;font-size:11px}.profile-save-cta,.profile-download-cta{display:block;width:100%;margin:7px 0}}

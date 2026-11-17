@@ -4,7 +4,7 @@
  const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const COMPAT=window.EstacaoCompat;
  const money=n=>Number.isFinite(n)?new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n):'Preço ainda não pesquisado';
- const LAST=11,TOTAL_STEPS=12;
+ const LAST=12,TOTAL_STEPS=13;
  const ids={
   AM5:{cpu:['cpu-r5-7600','cpu-amd-r5-9600x','cpu-amd-r7-9700x'],board:['mb-msi-pro-b650m-p','mb-asrock-b650m-hdv-m2','mb-asus-tuf-b650m-e-wifi'],ram:['ram-teamgroup-vulcan-eco-ddr5-32gb','ram-kingston-fury-beast-ddr5-32-2x16','ram-teamgroup-expert-ddr5-64gb']},
   AM4:{cpu:['cpu-r5-5600','cpu-r7-5700g','cpu-r7-5700x'],board:['mb-msi-a520m-a-pro','mb-msi-b550m-pro-vdh-wifi'],ram:['ram-lexar-ddr4-16gb','ram-kingston-fury-rgb-ddr4-64gb','ram-kingston-fury-beast-ddr4-32-2x16']},
@@ -19,7 +19,8 @@
   {label:'Fonte',title:'Como todas as peças receberão energia?',help:'A fonte alimenta o computador. Aqui, qualidade e conectores importam mais que promessas de potência.',pros:'Fonte confiável é essencial para estabilidade.',cons:'É preciso confirmar cabos e potência para a placa de vídeo.'},
   {label:'Cooler',title:'Como manter o processador refrigerado?',help:'O cooler retira o calor do processador. Um modelo adequado ajuda a reduzir ruído e perda de desempenho.',pros:'Temperatura mais controlada durante exportações longas.',cons:'Precisa ser compatível com o processador e caber no gabinete.'},
   {label:'Gabinete',title:'Onde as peças serão instaladas?',help:'O gabinete protege as peças e permite ventilação. Não é apenas uma escolha estética.',pros:'Um gabinete ventilado facilita montagem e manutenção.',cons:'Confirme espaço para placa-mãe, placa de vídeo e cooler.'},
-  {label:'Ventoinhas extras do gabinete',title:'Precisa adicionar ventoinhas ao gabinete?',help:'Estas ventoinhas fazem o AR circular no gabinete. Não substituem o cooler do processador nem o gabinete. Muitos gabinetes já vêm com 2 ou 3.',pros:'Ajuda a ventilar quando as ventoinhas inclusas não são suficientes.',cons:'Se o gabinete já ventila bem, comprar extras só aumenta custo, cabos e ruído.'}
+  {label:'Ventoinhas extras do gabinete',title:'Precisa adicionar ventoinhas ao gabinete?',help:'Estas ventoinhas fazem o AR circular no gabinete. Não substituem o cooler do processador nem o gabinete. Muitos gabinetes já vêm com 2 ou 3.',pros:'Ajuda a ventilar quando as ventoinhas inclusas não são suficientes.',cons:'Se o gabinete já ventila bem, comprar extras só aumenta custo, cabos e ruído.'},
+  {label:'Pasta térmica',title:'Precisa comprar pasta térmica separada?',help:'Ela ajuda a transferir o calor do processador para o cooler. Muitos coolers já vêm com pasta aplicada ou em sachê.',pros:'Uma seringa é útil se o cooler não inclui pasta ou se você o reinstalar.',cons:'Comprar se já estiver incluída é gasto desnecessário; aplicar excesso é prejudicial.'}
  ];
  const goals=[
   {id:'economia',title:'Fotografia do dia a dia',detail:'Quero começar com orçamento controlado.',pros:'Menor investimento inicial.',cons:'Menor folga para ferramentas pesadas e IA.',recommended:false},
@@ -31,7 +32,7 @@
   {id:'INTEL',title:'Intel — linha Core Ultra ou atual',detail:'Alternativa moderna a comparar pelos preços.',pros:'Bom desempenho em várias tarefas.',cons:'Placas-mãe e refrigeração variam muito entre gerações.',recommended:false},
   {id:'AM4',title:'AMD AM4 — plataforma anterior',detail:'Base mais antiga, ainda útil em alguns orçamentos.',pros:'Pode aproveitar peças mais econômicas.',cons:'Menos caminho de atualização futura.',recommended:false}
  ];
- const extra={storage:['ssd-wd-blue-sn580-1tb','ssd-wd-black-sn770-1tb','ssd-kingston-nv2-2tb'],gpu:['gpu-galax-rtx5060-8gb','gpu-asrock-rx-7600-challenger-8gb','gpu-gigabyte-rtx-5060-ti-16'],psu:['psu-corsair-cx650','psu-corsair-rm750e-750w','psu-cm-mwe-gold-850-v3'],cooler:['cooler-deepcool-ag400-g2','cooler-deepcool-ag620','cooler-deepcool-ak400'],case:['case-acegeek-qube-mesh','case-corsair-4000d-airflow','case-pichau-cypher'],fans:['fan-cm-sickleflow-120','fan-thermalright-tl-m12q-3','fan-thermalright-tl-s12-3']};
+ const extra={storage:['ssd-wd-blue-sn580-1tb','ssd-wd-black-sn770-1tb','ssd-kingston-nv2-2tb'],gpu:['gpu-galax-rtx5060-8gb','gpu-asrock-rx-7600-challenger-8gb','gpu-gigabyte-rtx-5060-ti-16'],psu:['psu-corsair-cx650','psu-corsair-rm750e-750w','psu-cm-mwe-gold-850-v3'],cooler:['cooler-deepcool-ag400-g2','cooler-deepcool-ag620','cooler-deepcool-ak400'],case:['case-acegeek-qube-mesh','case-corsair-4000d-airflow','case-pichau-cypher'],fans:['fan-cm-sickleflow-120','fan-thermalright-tl-m12q-3','fan-thermalright-tl-s12-3'],paste:['paste-cooler-master-mastergel-regular','paste-cooler-master-cryofuze-2g']};
  const socket={
   'cpu-r5-5600':'AM4','cpu-r7-5700g':'AM4','cpu-r7-5700x':'AM4','cpu-r5-7600':'AM5','cpu-amd-r5-9600x':'AM5','cpu-amd-r7-9700x':'AM5','cpu-u5-245k':'LGA1851','cpu-u7-265k':'LGA1851','cpu-i5-14400':'LGA1700',
   'mb-msi-a520m-a-pro':'AM4','mb-msi-b550m-pro-vdh-wifi':'AM4','mb-msi-pro-b650m-p':'AM5','mb-asrock-b650m-hdv-m2':'AM5','mb-asus-tuf-b650m-e-wifi':'AM5','mb-gigabyte-b860m-ds3h':'LGA1851','mb-asus-tuf-z890-plus-wifi':'LGA1851','mb-gigabyte-b760m-gaming-ddr4':'LGA1700'};
@@ -57,11 +58,13 @@
  else if(stage===5)idsFor=extra.psu;
  else if(stage===6)idsFor=extra.cooler;
  else if(stage===7)idsFor=extra.case;
- else idsFor=extra.fans;
+ else if(stage===8)idsFor=extra.fans;
+ else idsFor=extra.paste;
  let opts=idsFor.map(current).filter(x=>product(x.id));
  if(stage===4&&hasIGPU()){const goal=selected[0]?.value?.id;opts=[{type:'included',id:'integrated'},...(goal==='intenso'?[current('gpu-galax-rtx5060-8gb'),current('gpu-gigabyte-rtx-5060-ti-16')]:opts.slice(0,2))];}
  if(stage===4&&!hasIGPU())opts=opts.slice(0,3);
  if(stage===8)opts=[{type:'included',id:'no-extra-fans'},current('fan-cm-sickleflow-120'),current('fan-thermalright-tl-m12q-3')];
+ if(stage===9)opts=[{type:'included',id:'paste-already-applied'},current('paste-cooler-master-mastergel-regular'),current('paste-cooler-master-cryofuze-2g')];
  if(stage===2&&!ramDDR()){opts=[current('ram-lexar-ddr4-16gb'),current('ram-teamgroup-vulcan-eco-ddr5-32gb'),{type:'manual',id:'manual-ram'}];}if(stage===2&&ramDDR()==='DDR4')opts=opts.slice(0,3);
  if(stage===2&&ramDDR()==='DDR5')opts=opts.slice(0,3);
  if(stage===1&&opts.length===1)opts.push({type:'manual',id:'manual-board'});
@@ -69,7 +72,8 @@
  if(opts.length>3)opts=opts.slice(0,3);
  return opts;
  }
- function optionInfo(o,stage){if(o.type==='included'&&o.id==='no-extra-fans')return {title:'Não comprar ventoinhas extras',price:0,pros:'Evita gastar à toa se o gabinete já inclui ventoinhas suficientes.',cons:'Se faltar fluxo de ar, será preciso adicionar ventoinhas depois.',detail:'Recomendado para gabinetes que já têm boa ventilação; confira quantas vêm na caixa.',date:'',source:'Opcional'};
+ function optionInfo(o,stage){if(o.type==='included'&&o.id==='paste-already-applied')return {title:'Não comprar agora: verificar se já vem aplicada',price:0,pros:'Evita duplicar uma pasta térmica já incluída com o cooler.',cons:'Se não vier, será necessário comprar uma seringa antes de montar.',detail:'RECOMENDAÇÃO TÉCNICA: confira a embalagem do cooler. Se a pasta já estiver aplicada, não compre outra por enquanto.',date:'',source:'Verificar com o vendedor'};
+ if(o.type==='included'&&o.id==='no-extra-fans')return {title:'Não comprar ventoinhas extras',price:0,pros:'Evita gastar à toa se o gabinete já inclui ventoinhas suficientes.',cons:'Se faltar fluxo de ar, será preciso adicionar ventoinhas depois.',detail:'Recomendado para gabinetes que já têm boa ventilação; confira quantas vêm na caixa.',date:'',source:'Opcional'};
  if(o.type==='included')return {title:'Usar vídeo integrado do processador',price:0,pros:'Não precisa comprar placa separada.',cons:'Pode limitar edição com IA e recursos mais exigentes.',detail:'SÓ está disponível porque este processador realmente tem vídeo integrado. Sem esse recurso, uma GPU dedicada é OBRIGATÓRIA.',date:'',source:'Incluído no processador'};
  if(o.type==='manual')return {title:'Pesquisar outro modelo com ajuda',price:null,pros:'Você poderá informar o modelo e o preço depois.',cons:'A compatibilidade e o preço precisarão ser verificados manualmente.',detail:'Etapa marcada como pendente de pesquisa.',date:'',source:'Informado por você'};
  const p=product(o.id),price=Number.isFinite(p.bestPrice)?p.bestPrice:null;
@@ -83,7 +87,7 @@
  const help=stages[stage];return {title:p.name,price,pros:spec.pros||help.pros,cons:spec.cons||help.cons,detail:stage===2?'Confira se sua placa-mãe aceita este padrão de memória.':stage===4?'Confirme conectores da fonte e espaço no gabinete.':'Confira o modelo exato antes da compra.',date:p.lastResearchDate||DATA.meta?.pricingDate||'',source:p.sources||'Catálogo Estação RAW',qty:spec.qty||1};
  }
  function options(){if(step===0)return goals.map(g=>({type:'goal',id:g.id,...g}));if(step===1)return platforms.map(p=>({type:'platform',id:p.id,...p}));const stage=step-2;let opts=choicesFor(stage);let rec=bestIndex(opts,stage);if(rec<0)rec=0;return opts.map((o,i)=>({...o,...optionInfo(o,stage),recommended:i===rec}));}
- function rowFromOption(opt,i){const category=labels[i],date=new Date().toISOString().slice(0,10);if(opt.type==='included'&&i===8)return COMPAT.optionalFan();if(opt.type==='included')return {label:category,name:'INTEGRADO — vídeo do processador (sem placa separada)',qty:0,unitPrice:0,source:'Incluído no processador',url:'',date,productId:'custom',manual:false,kind:'incluido'};
+ function rowFromOption(opt,i){const category=labels[i],date=new Date().toISOString().slice(0,10);if(opt.type==='included'&&i===8)return COMPAT.optionalFan();if(opt.type==='included'&&i===9)return COMPAT.optionalPaste();if(opt.type==='included')return {label:category,name:'INTEGRADO — vídeo do processador (sem placa separada)',qty:0,unitPrice:0,source:'Incluído no processador',url:'',date,productId:'custom',manual:false,kind:'incluido'};
  if(opt.type==='manual')return {label:category,name:'Pesquisar e informar modelo',qty:1,unitPrice:null,source:'Pendente — escolha sua peça',url:'',date:'',productId:'custom',manual:true,kind:'referencia'};
  const p=product(opt.id);const offer=(p.offers||[]).filter(o=>Number.isFinite(o.price)).sort((a,b)=>a.price-b.price)[0];return {label:category,name:p.name,qty:opt.qty||1,unitPrice:Number.isFinite(p.bestPrice)?p.bestPrice:null,source:offer?.store||'Catálogo Estação RAW',url:/^https:\/\//.test(offer?.url||'')?offer.url:'',date:offer?.date||p.lastResearchDate||DATA.meta.pricingDate,productId:p.id,manual:false,kind:'referencia'};}
  function rows(){return stages.map((_,i)=>rowFromOption(selected[i+2]?.value||{type:'manual',id:'missing'},i));}
