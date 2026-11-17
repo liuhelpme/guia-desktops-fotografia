@@ -10,13 +10,13 @@
   <meta property="og:type" content="website">
   <title>Estação RAW — Guia de desktops para fotografia</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
-  <script src="builder.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261117-fix1">
+  <script src="app.js?v=20261117-fix1" defer></script>
+  <script src="builder.js?v=20261117-fix1" defer></script>
   <script src="ux.js" defer></script>
   <script src="navigation.js" defer></script>
   <script src="from-scratch.js" defer></script>
-  <script src="json-assistant.js" defer></script>
+  <script src="json-assistant.js?v=20261117-fix1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#montagens">Pular para configurações</a>
@@ -103,7 +103,7 @@
         <div class="json-assistant-section-top"><h3>1. Copie a configuração para analisar com IA</h3><span id="json-assistant-profile-name"></span></div>
         <p>Veja as oito categorias de peças, quantidades e valores. A pergunta pronta ajuda a IA a avaliar compatibilidade, vantagens, problemas e custo-benefício.</p>
         <textarea id="json-assistant-output" readonly spellcheck="false" aria-label="JSON da configuração para copiar"></textarea>
-        <div class="json-assistant-actions"><button type="button" data-json-action="copy-prompt" class="json-assistant-primary">Copiar pergunta pronta + JSON</button><button type="button" data-json-action="copy-json">Copiar somente JSON</button></div>
+        <div class="json-assistant-actions"><button type="button" data-json-action="copy-prompt" class="json-assistant-primary">Copiar pergunta pronta + JSON</button><button type="button" data-json-action="copy-json">Copiar somente JSON</button><button type="button" data-json-action="download-prompt">Baixar pergunta e JSON (.txt)</button></div><output id="json-assistant-copy-status" class="json-assistant-status" role="status" aria-live="polite"></output><div id="json-assistant-manual-wrap" class="json-assistant-manual-wrap" hidden><label for="json-assistant-manual"><strong>Cópia automática bloqueada:</strong> selecione o texto completo abaixo e toque em Copiar (ou use Ctrl+C no computador).</label><textarea id="json-assistant-manual" spellcheck="false" aria-label="Texto completo para copiar manualmente"></textarea></div>
         <small>A IA pode errar. Confira preços e compatibilidade com as fontes e fabricantes antes de comprar. Não compartilhe dados pessoais.</small>
       </section>
       <section class="json-assistant-section" aria-label="Colar configuração">

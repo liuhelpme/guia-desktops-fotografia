@@ -35,12 +35,17 @@
   const details=$('#details-dialog');if(details?.open)details.close();
   $('#json-assistant-profile-name').textContent=current.name;
   $('#json-assistant-output').value=JSON.stringify(current,null,2);
-  $('#json-assistant-input').value='';status('');if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
+  $('#json-assistant-input').value='';$('#json-assistant-copy-status').textContent='';$('#json-assistant-manual-wrap').hidden=true;$('#json-assistant-manual').value='';status('');if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
  }
  async function copy(value){
-  try{if(!navigator.clipboard?.writeText)throw Error('Acesso à área de transferência indisponível');await navigator.clipboard.writeText(value);status('Copiado! Agora cole o texto na IA que preferir. Nenhum dado foi enviado automaticamente.');}
-  catch{const field=$('#json-assistant-output');field.focus();field.select();status('Seu navegador não permitiu copiar automaticamente. O JSON foi selecionado: use Ctrl+C (ou Copiar no celular). Para copiar a pergunta pronta, utilize um navegador que permita acesso à área de transferência.');}
+  const note=$('#json-assistant-copy-status'),wrap=$('#json-assistant-manual-wrap'),field=$('#json-assistant-manual');
+  wrap.hidden=true;field.value='';
+  try{if(!navigator.clipboard?.writeText)throw Error('Área de transferência não autorizada');await navigator.clipboard.writeText(value);note.textContent='Copiado! Cole o texto no ChatGPT ou em outra IA. Nenhuma informação foi enviada automaticamente.';return;}
+  catch{/* O navegador pode bloquear a permissão de cópia, especialmente em alguns celulares. */}
+  try{const temp=document.createElement('textarea');temp.value=value;temp.setAttribute('readonly','');temp.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';document.body.append(temp);temp.focus();temp.select();const copied=typeof document.execCommand==='function'&&document.execCommand('copy');temp.remove();if(copied){note.textContent='Copiado! Cole o texto no ChatGPT ou em outra IA.';return;}}catch{/* Mantém a alternativa manual abaixo. */}
+  wrap.hidden=false;field.value=value;field.focus();field.select();note.textContent='O navegador bloqueou a cópia automática. O texto COMPLETO está selecionado abaixo para você copiar manualmente.';
  }
+ function downloadPrompt(){if(!current)return;const data=promptFor(current),blob=new Blob([data],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='analise-estacao-raw.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#json-assistant-copy-status').textContent='Arquivo de texto gerado para baixar. Ele contém a pergunta e a configuração JSON.';}
  function importPasted(){
   let text=$('#json-assistant-input').value.trim();if(!text){status('Cole o JSON completo no campo antes de continuar.');return;}
   if(text.length>120000){status('O texto é muito grande. Cole somente o JSON da configuração.');return;}
@@ -49,7 +54,7 @@
   if(!window.confirm(`Abrir “${build.name}” no montador?\n\nA montagem atualmente aberta será substituída por esta cópia. Os perfis que você já salvou continuarão guardados. Nada será comprado.`)){status('Importação cancelada. A montagem atual não foi alterada.');return;}
   $('#json-assistant-dialog').close();window.dispatchEvent(new CustomEvent('estacao:open-custom-build',{detail:{build}}));
  }
- window.addEventListener('estacao:data-ready',e=>{DATA=e.detail.data;},{once:true});
+ if(window.__ESTACAO_RAW_READY)DATA=window.__ESTACAO_RAW_READY;else window.addEventListener('estacao:data-ready',e=>{DATA=e.detail.data;},{once:true});
  window.addEventListener('estacao:show-json-assistant',e=>{if(DATA&&e.detail?.build)open(e.detail.build);});
  document.addEventListener('click',e=>{
   const profile=e.target.closest('[data-ai-json-profile]');if(profile){if(!DATA)return;try{open(byProfile(profile.dataset.aiJsonProfile));}catch(err){console.error(err);}return;}
@@ -58,6 +63,7 @@
   if(action==='close'){$('#json-assistant-dialog').close();return;}
   if(action==='copy-json'&&current){copy(JSON.stringify(current,null,2));return;}
   if(action==='copy-prompt'&&current){copy(promptFor(current));return;}
+  if(action==='download-prompt'&&current){downloadPrompt();return;}
   if(action==='import')importPasted();
  });
  $('#json-assistant-dialog')?.addEventListener('click',e=>{if(e.target.id==='json-assistant-dialog')e.target.close();});
