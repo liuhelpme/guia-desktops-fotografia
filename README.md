@@ -155,3 +155,21 @@ O mesmo painel fica acessível pelo botão **Copiar / colar JSON para IA** dentr
 **Limpeza de interface solicitada:** foram retirados botões repetitivos de pesquisa no SeuHardware do editor de peças e os atalhos WAZ/Google Shopping de dentro das etapas do assistente. A informação longa de “Antes de comprar” foi retirada do bloco lateral; permanecem avisos de compatibilidade e de que os valores são referências, em pontos relevantes. As lojas continuam acessíveis na seção de fontes e referências.
 
 **QA:** `node --check` de app.js, builder.js, from-scratch.js e json-assistant.js; testes funcionais Chromium via scripts injetados, em 320/390/768/1440 px, para copiar pergunta + JSON, analisar formato, rejeitar texto inválido, alterar preço via JSON, importar e abrir montador, abrir novamente a cópia de uma montagem personalizada e confirmar ausência de rolagem horizontal e exceções JS. As 22 montagens foram preservadas com seus preços-base; o catálogo individual foi ampliado para 80 produtos sem mudar os orçamentos históricos.
+
+## Ajustes de interface e contadores — 17/11/2026
+
+- Correção de contraste dos botões **Montar do zero** no destaque inicial e no banner, com estados `hover`, teclado/foco e desabilitado definidos sem depender do estilo padrão do navegador.
+- Cartões com ações curtas acompanhadas de ícones e títulos explicativos: **Detalhes**, **Editar**, **Salvar**, **Baixar**, **Compartilhar**, **JSON para IA**, **Comparar**. A explicação extensa dos botões foi movida para uma seção recolhível acessível.
+- As opções principais da abertura ficam claras: **Me ajude a escolher**, **Montar do zero** ou **Ver computadores**.
+- Correção de inconsistências editoriais: a descrição do montador deixa de dizer 11 etapas (o código atual inclui 13), e contadores exibidos antes de carregar o catálogo não mostram valores antigos.
+- Contadores de perfis, plataformas, modelos e registros, títulos e resumo da pesquisa passam a ser atualizados a partir de `data.json` pelo script. Metadados HTML não incluem números sujeitos a atualizações semanais.
+- Correção de seletor CSS para largura do celular (`..shell` para `.shell`).
+- Não foram alterados `data.json`, preços, regras de compatibilidade, perfis existentes, critérios de recomendações ou links de vendedores.
+- QA local com Chromium headless em 320, 390, 768 e 1440 px: 22 cartões, 89 peças, 141 registros, 13 etapas, contraste de botões, abertura do assistente e do editor, sem overflow ou erros JS.
+
+### Melhorias de arquitetura de informação avaliadas, ainda não aplicadas
+
+- Reunir os blocos de orientação em três caminhos mais compactos e recolher metodologia e lojas.
+- Adicionar `og:image` com imagem dedicada (precisa de um ativo real para URL social); melhorar indexação de configurações individuais.
+- Sincronizar filtros por query parameters e automatizar geração de `data.json` e CSVs de uma fonte única de dados.
+- A comparação de **até três perfis já existe** em `app.js`; evoluções devem aprimorar a apresentação sem duplicar o recurso.
