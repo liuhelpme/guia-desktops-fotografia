@@ -3,23 +3,28 @@
 (()=>{
  const $=s=>document.querySelector(s);
  let DATA=null,current=null;
- const labels=['Processador','Placa-mãe','Memória RAM','SSD / armazenamento','Placa de vídeo','Fonte','Cooler','Gabinete'];
+ const COMPAT=window.EstacaoCompat;
+ const labels=COMPAT.allLabels;
  function byProfile(id){
   const p=DATA?.profiles.find(x=>x.id===id);if(!p)throw Error('Não encontramos esse computador no catálogo.');
   return {v:1,baseId:p.id,name:`Meu perfil — ${p.title}`,assembly:p.pricing.assembly??250,
-   rows:p.pricing.items.map(r=>({label:r.label,name:r.name,qty:r.qty,unitPrice:r.unitPrice,source:r.source||'Pesquisa editorial',url:r.url||'',date:p.pricing.date||DATA.meta.pricingDate||'',productId:null,manual:false,kind:r.kind||'referencia'})),
+   rows:[...p.pricing.items.map(r=>({label:r.label,name:r.name,qty:r.qty,unitPrice:r.unitPrice,source:r.source||'Pesquisa editorial',url:r.url||'',date:p.pricing.date||DATA.meta.pricingDate||'',productId:null,manual:false,kind:r.kind||'referencia'})),COMPAT.optionalFan()],
    updatedAt:new Date().toISOString(),contexto:{finalidade:'Fotografia: Lightroom, Photoshop, Capture One e arquivos RAW',plataforma:p.platform,nivel:p.level,tipoDeVideo:p.gpuType,recomendacaoOriginal:p.why||'',cuidados:p.warning||'',pesquisaEditorial:p.pricing.date||DATA.meta.pricingDate||'',precificacao:'Valores editoriais de referência, não cotações ao vivo'}};
  }
  function normalize(data){
   if(!data||typeof data!=='object'||data.v!==1||typeof data.baseId!=='string')throw Error('O texto não é um JSON de montagem da Estação RAW. Use o botão de copiar JSON para começar.');
   const p=DATA?.profiles.find(x=>x.id===data.baseId);
   if(!p)throw Error('Esta configuração usa um perfil de base que não existe mais no catálogo.');
-  if(!Array.isArray(data.rows)||data.rows.length!==8||new Set(data.rows.map(r=>r?.label)).size!==8||labels.some(label=>!data.rows.some(r=>r?.label===label)))throw Error('O JSON deve ter exatamente os oito tipos de peças do computador.');
+  if(!Array.isArray(data.rows)||![8,9].includes(data.rows.length))throw Error('O JSON deve conter os 8 componentes principais (ou 9 incluindo ventoinhas extras).');
+  const upgraded=[...data.rows];if(!upgraded.some(r=>r?.label==='Ventoinhas extras do gabinete'))upgraded.push(COMPAT.optionalFan());
+  if(new Set(upgraded.map(r=>r?.label)).size!==9||labels.some(label=>!upgraded.some(r=>r?.label===label)))throw Error('Cada categoria deve aparecer uma vez: cooler do processador, gabinete e ventoinhas extras separados.');
   if(typeof data.name!=='string'||!data.name.trim()||data.name.length>160||typeof data.assembly!=='number'||!Number.isFinite(data.assembly)||data.assembly<0||data.assembly>100000)throw Error('Confira o nome do perfil e o valor da montagem.');
-  const baseRows=Object.fromEntries(p.pricing.items.map(r=>[r.label,r]));
-  const rows=data.rows.map(r=>{
+  const baseRows=Object.fromEntries([...p.pricing.items,COMPAT.optionalFan()].map(r=>[r.label,r]));
+  const rows=upgraded.map(r=>{
    if(typeof r.name!=='string'||r.name.length>260||!Number.isInteger(r.qty)||r.qty<0||r.qty>8||!(r.unitPrice===null||(typeof r.unitPrice==='number'&&Number.isFinite(r.unitPrice)&&r.unitPrice>=0&&r.unitPrice<=1000000)))throw Error('Há uma peça com nome, quantidade ou preço inválido.');
    const base=baseRows[r.label];const edited=!!r.manual||r.name!==base.name||r.unitPrice!==base.unitPrice;
+   if(COMPAT.wrongManualCategory(r.label,r.name))throw Error(`A peça ${r.name} parece não pertencer ao campo ${r.label}. Escolha a categoria correta.`);
+   const selectedProduct=DATA.products.find(x=>x.id===r.productId);if(selectedProduct&&selectedProduct.category!==COMPAT.categoryFor[r.label])throw Error(`A peça ${selectedProduct.name} está no campo errado: ${r.label}.`);
    const url=typeof r.url==='string'&&/^https:\/\/[a-z\d][^\s<>"']*$/i.test(r.url)?r.url:'';
    return {label:r.label,name:r.name,qty:r.qty,unitPrice:r.unitPrice,
     source:edited?'Informado em JSON — não verificado':String(r.source||'Pesquisa editorial').slice(0,350),
@@ -28,7 +33,7 @@
   return {v:1,baseId:p.id,name:data.name,assembly:data.assembly,rows,updatedAt:new Date().toISOString(),fromScratch:!!data.fromScratch};
  }
  function promptFor(build){
-  return `Analise a configuração de computador abaixo para edição de fotografias (Lightroom Classic, Photoshop, Capture One e arquivos RAW). Explique em linguagem simples:\n1. Se processador, placa-mãe e memória são compatíveis (incluindo soquete, geração DDR e BIOS).\n2. Se fonte, refrigeração, gabinete, SSD e placa de vídeo são adequados.\n3. Vantagens, desvantagens, peças que podem faltar e possíveis gargalos.\n4. Qual é sua RECOMENDAÇÃO TÉCNICA e o motivo, com até três alternativas de melhoria por prioridade e custo-benefício.\n5. Quais preços são apenas referências e precisam ser conferidos na loja.\nNão presuma estoque, preços ao vivo ou compatibilidade total sem especificações do fabricante. Se você sugerir um novo JSON para eu importar de volta, preserve v, baseId e exatamente as oito categorias label, e mantenha unitPrice como null quando o preço não estiver confirmado. Não inclua dados pessoais.\n\nCONFIGURAÇÃO (JSON):\n${JSON.stringify(build,null,2)}`;
+  return `Analise a configuração de computador abaixo para edição de fotografias (Lightroom Classic, Photoshop, Capture One e arquivos RAW). Explique em linguagem simples:\n1. Se processador, placa-mãe e memória são compatíveis (incluindo soquete, geração DDR e BIOS).\n2. Se fonte, cooler do processador, ventoinhas extras do gabinete, SSD e placa de vídeo são adequados. CPUs sem vídeo integrado precisam obrigatoriamente de GPU dedicada para mostrar imagem, mesmo com HDMI na placa-mãe.\n3. Vantagens, desvantagens, peças que podem faltar e possíveis gargalos.\n4. Qual é sua RECOMENDAÇÃO TÉCNICA e o motivo, com até três alternativas de melhoria por prioridade e custo-benefício.\n5. Quais preços são apenas referências e precisam ser conferidos na loja.\nNão presuma estoque, preços ao vivo ou compatibilidade total sem especificações do fabricante. Se você sugerir um novo JSON para eu importar de volta, preserve v, baseId e exatamente as nove categorias label (incluindo Ventoinhas extras do gabinete; arquivos antigos com oito são aceitos), e mantenha unitPrice como null quando o preço não estiver confirmado. Não inclua dados pessoais.\n\nCONFIGURAÇÃO (JSON):\n${JSON.stringify(build,null,2)}`;
  }
  function status(msg){$('#json-assistant-status').textContent=msg;}
  function open(build){current=JSON.parse(JSON.stringify(build));const dialog=$('#json-assistant-dialog');

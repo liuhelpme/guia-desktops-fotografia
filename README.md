@@ -1,6 +1,19 @@
 # Estação RAW · Guia de desktops para fotografia
 
-Site responsivo, estático e independente de backend para comparar 18 perfis de computadores para fotografia (AM4, AM5 e Intel), pesquisar 63 modelos de componentes e consultar 109 registros de ofertas, com links e alertas técnicos.
+Site responsivo, estático e independente de backend para comparar **22 perfis** de computadores de fotografia (18 originais + 4 propostas mais recentes), pesquisar **80 modelos de componentes** e consultar **133 registros de ofertas e pesquisas**, com links e alertas técnicos.
+
+## Revisão de links, compatibilidade e custo-benefício — 17/11/2026
+
+**Situação e limites:** auditoria editorial de **27 URLs entre 140 URLs distintas** de anúncio/referência registrados no catálogo e nos perfis; **113 URLs não foram verificadas individualmente**. Duas referências adicionais foram consultadas fora dessa base. O relatório estruturado `auditoria-links-2026-11-17.json` documenta quais links abriram, redirecionaram para categoria, mostraram apenas preços antigos ou bloquearam acesso automatizado. **Não é certificação de funcionamento de 100% dos links nem garantia de estoque.** Bloqueio HTTP 403 pode decorrer de restrição ao robô e não indica que o produto saiu de linha.
+
+- **22 montagens-base preservadas:** nenhuma troca de componente ou valor em perfil antigo foi automática. A pessoa escolhe e confirma alternativas no montador. O catálogo individual passou a **80 peças e 133 registros de oferta/pesquisa**, incluindo DDR4 de 32 GB, RTX 5060, fonte 650 W, refrigeração de processador AG400 G2 e AK620 Zero Dark Zoria, mais ventoinhas individuais e kits de três. Os preços incluem data, modelo/SKU e ressalvas sobre estoque.
+- **Três campos diferentes:** `Cooler` é o dissipador do **processador**; `Gabinete` é a caixa física onde se monta o PC; `Ventoinhas extras do gabinete` são peças **opcionais** para melhorar a circulação de ar. Kits com três peças contam como uma unidade de kit. Não adicionar ventoinha do gabinete no campo de cooler do processador. O montador filtra o catálogo por categoria exata e avisa/bloqueia entradas manuais claramente trocadas.
+- **CPU sem gráficos integrados exige GPU dedicada:** Ryzen 5 5600, Ryzen 7 5700X, Ryzen 7 5800X3D, Core i5-10400F e outros Intel F/KF não produzem imagem por conta própria. Uma saída HDMI na placa-mãe não produz imagem com essas CPUs: a GPU separada é **obrigatória** para conectar o monitor. Se a CPU passar a ser uma dessas e a configuração só tiver vídeo integrado, o montador adiciona uma etapa pendente da GPU e marca o orçamento como **montagem incompleta — não comprar** até a escolha.
+- **Compatibilidade preliminar:** filtra placa-mãe pelo soquete da CPU (AM4, AM5, LGA1200, LGA1700, LGA1851); tipo de RAM DDR4/DDR5 quando identificável; cooler LGA1851 apenas se fonte especificar suporte. CPU sem vídeo e ausência de GPU é impedimento; manualmente, gabinete no campo cooler ou vice-versa gera alerta. Continuação requer verificar BIOS suportada, QVL da RAM, potência/conectores da fonte, dimensões de gabinete e cooler, ventilação e espaço da GPU.
+- **Custo-benefício conforme o perfil:** até três alternativas por campo com preço e data de pesquisa, respeitando a categoria, o encaixe conhecido e evitando reduzir automaticamente capacidade de RAM/SSD, quantidade de VRAM da placa de vídeo ou potência nominal da fonte. Recomendações não se aplicam a todos os perfis igualmente: para RAM/SSD de maior capacidade, apenas alternativas com capacidade pelo menos equivalente; para CPU de vídeo integrado, processadores sem iGPU não aparecem como alternativa econômica que funcionaria sem GPU. Fatores de desempenho e confiabilidade devem ser conferidos, preço isolado não decide a compra.
+- **JSON anterior preservado:** arquivos salvos com oito tipos de peças continuam importáveis, e o campo opcional de ventoinhas é acrescentado; novos JSONs contêm nove campos. Salvar, compartilhar, alterar valores, baixar JSON/CSV continuam disponíveis sem API paga.
+
+**Fontes oficiais e amostras:** AMD especificação Ryzen 5 5600 (requer placa de vídeo), Intel documentação da designação F/KF; especificações de MSI para placas AM5 que indicam saída de vídeo apenas com CPU compatível; páginas exatas da Pichau e TerabyteShop para produtos pesquisados em 17/11. Preço da página não garante preço no checkout. Os downloads `orcamentos-completos.csv` e `orcamentos-otimizados.csv` representam os perfis de referência e não somam ventoinhas opcionais adicionadas manualmente: estas constam da exportação pessoal.
 
 ## Início rápido
 
@@ -11,7 +24,7 @@ No diretório do projeto, execute `python -m http.server 8080` e abra http://loc
 - `index.html`: conteúdo, acessibilidade, SEO, ordenação por preço e metodologia.
 - `styles.css`: identidade visual e responsividade.
 - `app.js`: busca, filtros, detalhe dos custos de cada montagem, comparador e links.
-- `data.json`: os 18 perfis, 63 componentes, 109 ofertas históricas e **orçamentos completos com fontes por item**, alternativas de custo e histórico.
+- `data.json`: os 22 perfis, 80 componentes, 133 registros de ofertas (históricos e pesquisados) e **orçamentos completos com fontes por item**, alternativas de custo e histórico.
 - `orcamentos-completos.csv`: auditoria de todas as peças, preços, quantidades, origem, critérios de estimativa e total dos 18 PCs.
 - `favicon.svg`: identidade do site.
 
@@ -35,7 +48,7 @@ Site estático sem banco, sem integrações e sem APIs de terceiros. O Google Fo
 
 ## Política editorial
 
-Guia independente, não afiliado às lojas. Antes de comprar, confirmar SKU, vendedor, entrega, preço, condição, disponibilidade, garantia, BIOS e compatibilidade. Há revisão semanal agendada com fonte e QA, sem preço em tempo real.
+Guia independente, não afiliado às lojas. Antes de comprar, confirmar SKU, vendedor, entrega, preço, condição, disponibilidade, garantia, BIOS e compatibilidade. Há revisão semanal agendada com fontes e QA; o recálculo de preços é instantâneo no navegador, mas **não é uma cotação ao vivo**.
 
 ## Produção (Vercel)
 
@@ -83,7 +96,7 @@ A primeira modernização acrescentou **seis peças alternativas** ao catálogo 
 
 O site foi organizado para que cada função responda: **onde estou**, **o que posso fazer aqui** e **o que acontece depois de clicar**. A área **“Não entende de peças? Escolha pelo que você faz”** traz quatro situações usuais de fotografia e aponta um perfil existente, sempre com **recomendação técnica, motivo estratégico, vantagem, desvantagem e próximo passo**. A orientação principal para uma compra nova é AM5 básico com Ryzen 5 7600 + RX 7600 por equilíbrio e opções de atualização; depende de comparar preço total e não é uma promessa de compatibilidade ou disponibilidade.
 
-O montador mantém as oito categorias e o cálculo no navegador, com textos explicativos simples por peça (para que serve, vantagem, desvantagem e o que recomendamos), estados informativos após trocar, guardar e compartilhar, confirmação antes de redefinir ou excluir, e alerta de que verificações automáticas de compatibilidade são **preliminares**. A opção `Meu próprio modelo / valor` foi renomeada para **Adicionar outra peça ou informar preço manualmente**. Valores de lojas não são cotações ao vivo e alterações manuais são identificadas.
+O montador mantém as oito categorias obrigatórias e ventoinhas adicionais opcionais, com cálculo no navegador, com textos explicativos simples por peça (para que serve, vantagem, desvantagem e o que recomendamos), estados informativos após trocar, guardar e compartilhar, confirmação antes de redefinir ou excluir, e alerta de que verificações automáticas de compatibilidade são **preliminares**. A opção `Meu próprio modelo / valor` foi renomeada para **Adicionar outra peça ou informar preço manualmente**. Valores de lojas não são cotações ao vivo e alterações manuais são identificadas.
 
 O comparador mostra plataforma e nível, e os cartões explicam para quem a configuração é indicada e o que deve ser conferido. Filtros usam termos simples, mantendo as informações avançadas acessíveis. Controles de navegação, seleção e estados usam HTML semântico, foco visível e atualizações de status.
 
@@ -129,8 +142,8 @@ Na última etapa, **Confirmar e abrir montador** transfere as escolhas para `bui
 
 Cada um dos **22 perfis** agora possui botão **JSON para IA**, também disponível no detalhamento. Ele abre uma janela que explica o que está acontecendo e oferece duas alternativas: copiar somente o JSON ou copiar um pedido em linguagem simples com o JSON, incluindo solicitação de análise técnica (CPU/placa-mãe/DDR, GPU, refrigeração, fonte, gabinete, SSD, vantagens, limitações e custo-benefício). Nada é enviado automaticamente a plataformas externas. Caso a área de transferência do navegador não esteja disponível, o texto é selecionado para cópia manual.
 
-O mesmo painel fica acessível pelo botão **Copiar / colar JSON para IA** dentro de montagens personalizadas ou criadas do zero. É possível **colar um JSON completo**, inclusive envolto em bloco de código Markdown, conferir o formato e abrir no montador após confirmação explícita. A importação verifica identificador de perfil, oito categorias, quantidade, preços e campos essenciais. Nomes ou preços alterados no JSON passam a ser identificados como **não verificados**, em vez de herdar indevidamente a fonte do preço anterior. Perfis salvos em navegador não são apagados pela importação. O formato permanece compatível com o download JSON existente (`v:1`, `baseId`, `rows`, `assembly`, `name`).
+O mesmo painel fica acessível pelo botão **Copiar / colar JSON para IA** dentro de montagens personalizadas ou criadas do zero. É possível **colar um JSON completo**, inclusive envolto em bloco de código Markdown, conferir o formato e abrir no montador após confirmação explícita. A importação verifica identificador de perfil, oito categorias obrigatórias, quantidade, preços e campos essenciais. Nomes ou preços alterados no JSON passam a ser identificados como **não verificados**, em vez de herdar indevidamente a fonte do preço anterior. Perfis salvos em navegador não são apagados pela importação. O formato permanece compatível com o download JSON existente (`v:1`, `baseId`, `rows`, `assembly`, `name`).
 
 **Limpeza de interface solicitada:** foram retirados botões repetitivos de pesquisa no SeuHardware do editor de peças e os atalhos WAZ/Google Shopping de dentro das etapas do assistente. A informação longa de “Antes de comprar” foi retirada do bloco lateral; permanecem avisos de compatibilidade e de que os valores são referências, em pontos relevantes. As lojas continuam acessíveis na seção de fontes e referências.
 
-**QA:** `node --check` de app.js, builder.js, from-scratch.js e json-assistant.js; testes funcionais Chromium via scripts injetados, em 320/390/768/1440 px, para copiar pergunta + JSON, analisar formato, rejeitar texto inválido, alterar preço via JSON, importar e abrir montador, abrir novamente a cópia de uma montagem personalizada e confirmar ausência de rolagem horizontal e exceções JS. As 22 montagens e os 72 produtos foram preservados sem alterar os preços.
+**QA:** `node --check` de app.js, builder.js, from-scratch.js e json-assistant.js; testes funcionais Chromium via scripts injetados, em 320/390/768/1440 px, para copiar pergunta + JSON, analisar formato, rejeitar texto inválido, alterar preço via JSON, importar e abrir montador, abrir novamente a cópia de uma montagem personalizada e confirmar ausência de rolagem horizontal e exceções JS. As 22 montagens foram preservadas com seus preços-base; o catálogo individual foi ampliado para 80 produtos sem mudar os orçamentos históricos.
