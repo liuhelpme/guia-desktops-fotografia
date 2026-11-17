@@ -1,0 +1,46 @@
+{
+  "revisao": "2026-11-17",
+  "escopo": "Amostragem; não representa verificação completa de 100% dos links.",
+  "total_url_distintas": 140,
+  "urls_de_anuncios_verificadas": 27,
+  "urls_sem_verificacao_individual": 113,
+  "resultados_url": {
+    "https://www.pichau.com.br/processador-amd-ryzen-5-5600-6-core-12-threads-3-5ghz-4-4ghz-turbo-cache-35mb-am4-100-100000927box": "Página específica abre; preço e estoque podem mudar",
+    "https://www.kabum.com.br/produto/1053828/processador-amd-ryzen-7-5800x3d-3-4ghz-8-core-cache-100mb-am4-100-100000651pof": "Página específica encontrada; verificar preço e estoque",
+    "https://www.pichau.com.br/placa-de-video-galax-geforce-rtx-5060-1-click-oc-v2-8gb-gddr7-128-bit-56nsn8mddxbo": "Página específica encontrada; estoque não confirmado",
+    "https://www.pichau.com.br/placa-de-video-gigabyte-geforce-rtx-5060-ti-windforce-16gb-gddr7-128-bit-gv-n506twf2-16gd": "Página específica encontrada; estoque não confirmado",
+    "https://barracadobyte.com.br/placa-mae/msi-pro-b550m-p-wifi": "Página de comparador encontrada; conferir anúncio final",
+    "https://www.pichau.com.br/ssd-wd-blue-sn580-1tb-m-2-2280-pcie-nvme-leitura-4150mb-s-gravacao-4150mb-s-wds100t3b0e": "Página específica encontrada; estoque não confirmado",
+    "https://www.kabum.com.br/produto/419738/cooler-para-processador-gammaxx-ag400-led-deepcool-intel-amd": "Consulta automatizada bloqueada (403); não afirmar produto esgotado",
+    "https://www.pichau.com.br/gabinete-corsair-4000d-airflow-mid-tower-lateral-de-vidro-com-2-fans-preto-cc-9011200-ww": "Redirecionou para a categoria de gabinetes, não para o modelo exato; usar alternativa",
+    "https://mmhardware.com.br/produto.php?id=PC-123": "Página específica WD Blue SN580 1 TB acessível; confirmar compra e preço final",
+    "https://www.pichau.com.br/fonte-corsair-cx650-650w-80-plus-bronze-preto-cp-9020278-br": "Página do SKU CP-9020278-BR acessível em 17/11; preço exibido R$ 339,99 PIX; estoque e frete não confirmados.",
+    "https://www.pichau.com.br/cooler-para-processador-deepcool-ak400-120mm-r-ak400-bknnmn-g-1": "Página específica do AK400 acessível em 17/11; preço Pix exibido R$ 219,99; estoque não confirmado.",
+    "https://comprar.blendibox.com.br/kabum/gabinete-gamer-corsair-3000d-airflow-mid-tower-atx-lateral-em-vidro-temperado-2x-469162/": "Página de comparador acessível, preço antigo verificado em agosto/2026; não é estoque ou anúncio atual da Kabum.",
+    "https://levelupshop.com.br/produto/air-cooler-deepcool-ag400-preto-led/": "Página específica acessível 17/11 e informa em estoque e Pix R$ 184,90; confirmar CEP, compra e frete no checkout.",
+    "https://www.infotecudi.com.br/gabinete-pichau-cypher-mid-tower-lateral-de-vidro-preto-novo-lacrado": "Falha de acesso pela ferramenta de pesquisa; não concluir que o produto está esgotado.",
+    "https://radardogamer.com.br/produto/kingston-memoria-ram-kingston-fury-beast-64gb-2x32gb-1fd291": "Falha na consulta automatizada (cache); não foi possível verificar oferta/estoque.",
+    "https://www.hardwarebarato.com/produtos/memorias-ram/ddr5-64gb-6000": "Página de COMPARADOR (conjunto de modelos diferentes), não oferta de SKU único. Conferir marca/latência e vendedor.",
+    "https://www.pichau.com.br/ssd-wd-black-sn770-2tb-m-2-2280-pcie-nvme-leitura-de-5150-mb-s-gravacao-de-4850-mb-s-wds200t3x0e": "Página do SKU WDS200T3X0E abre, Pix exibido R$ 2.169,99; não garante estoque.",
+    "https://www.pichau.com.br/ssd-wd-black-sn770-1tb-m-2-2280-pcie-nvme-leitura-5150-mb-s-gravacao-4900-mb-s-wds100t3x0e": "Página do SKU WDS100T3X0E abre, Pix exibido R$ 639,99; não garante estoque.",
+    "https://www.kabum.com.br/produto/691266/fonte-corsair-rm750e-rme-series-2025-750w-atx-3-1-pcie-5-1-cybenetics-gold-certified-full-modular-preto-cp-9020295-br": "Consulta automatizada bloqueada pelo site (HTTP 403); não comprova ausência de produto ou de estoque. Confirmar o SKU CP-9020295-BR na loja.",
+    "https://www.pichau.com.br/cooler-para-processador-deepcool-ak620-120mm-preto-e-prata-r-ak620-bknnmt-g": "Página do DeepCool AK620 R-AK620-BKNNMT-G localizada; preço/estoque devem ser conferidos no checkout. A variante Zero Dark Zoria tem outro SKU e não é o mesmo anúncio.",
+    "https://www.terabyteshop.com.br/produto/31564/ssd-kingston-nv3-1tb-m2-nvme-2280-pcie-40-leitura-6000mbs-e-gravacao-4000mbs-snv3s1000g?p=3380737": "Página do SSD NV3 1 TB SNV3S/1000G acessível; preço Pix pesquisado R$ 1.149,90; comparar com SSDs equivalentes e confirmar frete, vendedor e estoque.",
+    "https://www.kabum.com.br/produto/523145/placa-mae-asus-tuf-gaming-b650m-e-wifi-amd-am5-b650-ddr5-preto-90mb1fv0-m0eay0": "Consulta automatizada bloqueada (403); não significa produto descontinuado ou esgotado.",
+    "https://www.progaming.com.br/cooler-para-processador-deepcool-ag620-preto-dual-fan-120mm-r-ag620-bknnmn-g-1-p4937": "Página específica do DeepCool AG620 R-AG620-BKNNMN-G-1 localizada; não garante estoque nem valor final.",
+    "https://www.pichau.com.br/memoria-team-group-t-force-vulcan-eco-32gb-2x16gb-ddr5-6000mhz-c38-prata-flesd532g6000hc38adc01": "Página do kit DDR5 6000 32 GB 2x16 CL38 FLESD532G6000HC38ADC01 acessível, Pix R$ 819,99 na consulta; validar configuração EXPO/XMP e lista QVL.",
+    "https://www.guerradigital.com.br/produtos/msi-pro-b650m-p-chipset-b650-amd-am5-m-atx-ddr5-911-7e27-006/": "Página do modelo MSI PRO B650M-P acessível; aviso genérico de carrinho sobre estoque não confirma indisponibilidade do SKU. Confirmar na loja.",
+    "https://www.pichau.com.br/placa-mae-msi-pro-b650m-p-ddr5-socket-amd-am5-m-atx-chipset-amd-b650-pro-b650m-p": "Página específica da MSI PRO B650M-P AM5/DDR5 acessível; preço e estoque não confirmados.",
+    "https://www.pichau.com.br/cooler-para-processador-deepcool-ak620-zero-dark-zoria-120mm-preto-e-amarelo-r-ak620-bknpmn-e": "Página da variante DeepCool AK620 Zero Dark Zoria R-AK620-BKNPMN-E acessível; R$ 249,99 PIX na consulta. SKU diferente do AK620 original; compatibilidade e dimensões declaradas; estoque não confirmado."
+  },
+  "referencias_externas_complementares": {
+    "https://www.terabyteshop.com.br/produto/30040/processador-amd-ryzen-5-9600x-39ghz-54ghz-turbo-6-cores-12-threads-am5-sem-cooler-10": "A consulta automatizada não abriu; não significa que a loja esteja fora do ar",
+    "https://www.kabum.com.br/produto/520365/processador-amd-ryzen-5-8600g-4-3-ghz-5-0ghz-max-turbo-cache-22mb-6-nucleos-12-threads-am5": "Não foi possível validar acesso nesta consulta; não assumir indisponibilidade"
+  },
+  "advertencias": [
+    "Página aberta não prova estoque, preço final nem checkout",
+    "HTTP 403 pode ser bloqueio de acesso automatizado",
+    "Preços e referências são registros históricos consultados em 17/11/2026, não valores ao vivo",
+    "Preferência de custo-benefício depende de compatibilidade, capacidade e desempenho no perfil"
+  ]
+}

@@ -203,6 +203,7 @@
 .json-assistant-section button.json-assistant-primary{background:#284f7c;color:white;border-color:#284f7c}
 .json-assistant-status{font-size:12px;line-height:1.6;font-weight:700;color:#255e58;min-height:16px;overflow-wrap:anywhere}
 @media(max-width:600px){.json-assistant-shell{padding:16px;gap:12px}.json-assistant-steps{grid-template-columns:1fr}.json-assistant-section{padding:14px}.json-assistant-actions{flex-direction:column}.json-assistant-section button{width:100%}.json-details-cta{margin-left:0;margin-top:8px}}
+
 /* PR regressão: acesso direto às ações de perfil e feedback de cópia/salvamento. */
 .profile-card .card-actions button[data-build-profile]{background:#235d48;border-color:#235d48;color:#fff;flex:1 1 100%;min-height:44px}
 .profile-card .card-actions button[data-ai-json-profile]{flex:1 1 100%;min-height:43px}
@@ -219,3 +220,18 @@
 .json-assistant-manual-wrap label{font-size:11px;line-height:1.65;color:#745524}
 .json-assistant-manual-wrap textarea{height:160px;resize:vertical;min-width:0;width:100%;border:1px solid #d9bc84;border-radius:7px;padding:10px;font:11px/1.6 ui-monospace,Consolas,monospace;color:#2d3c4b;background:white}
 @media(max-width:580px){.builder-share-panel>div{flex-direction:column}.builder-share-panel button{width:100%}.json-assistant-actions button{width:100%}}
+
+/* Revisão 17/11: custo-benefício por categoria, refrigeração e vídeo obrigatório */
+.gpu-required-note{display:block;background:#fff2e8;border:1px solid #eabb91;border-left:4px solid #b85d29;border-radius:7px;padding:10px 12px;color:#773a1e;font-size:11px;line-height:1.7;margin:10px 0}
+.profile-cost-benefit{background:#eaf5ef;color:#285943;padding:11px 13px;border-radius:8px;font-size:12px;line-height:1.8}
+.audit-market-notice{padding:14px 16px;background:#f1f6fb;border:1px solid #d0deec;color:#355068;border-radius:9px;margin-bottom:16px;font-size:12px;line-height:1.8}
+.audit-market-notice p{margin:5px 0 0}
+.builder-check-blocked{background:#fff0e8;border:1px solid #e6b59c;color:#8e3b22;border-radius:7px;padding:12px 15px;font-weight:900;line-height:1.7}
+.builder-recommendations{background:#f0f8f4;border:1px solid #d1e8dc;border-radius:8px;margin-top:11px;padding:12px;color:#24533a}
+.builder-recommendations>strong{font-size:12px;font-weight:900}
+.builder-recommendations>p{font-size:10px;line-height:1.65;margin:5px 0 9px;color:#507060}
+.builder-suggest-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #d8e9de;padding:9px 0}
+.builder-suggest-item>span{font-size:10px;line-height:1.65;min-width:0;overflow-wrap:anywhere}
+.builder-suggest-item small{display:block;font-size:9px;color:#6a7d73}
+.builder-suggest-item button{background:#257953;color:#fff;border:0;border-radius:6px;font-size:10px;min-height:35px;font-weight:800;padding:8px 10px;flex-shrink:0;max-width:145px}
+@media(max-width:580px){.builder-suggest-item{flex-wrap:wrap;gap:5px}.builder-suggest-item button{width:100%;max-width:none}}
