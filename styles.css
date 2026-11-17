@@ -203,3 +203,19 @@
 .json-assistant-section button.json-assistant-primary{background:#284f7c;color:white;border-color:#284f7c}
 .json-assistant-status{font-size:12px;line-height:1.6;font-weight:700;color:#255e58;min-height:16px;overflow-wrap:anywhere}
 @media(max-width:600px){.json-assistant-shell{padding:16px;gap:12px}.json-assistant-steps{grid-template-columns:1fr}.json-assistant-section{padding:14px}.json-assistant-actions{flex-direction:column}.json-assistant-section button{width:100%}.json-details-cta{margin-left:0;margin-top:8px}}
+/* PR regressão: acesso direto às ações de perfil e feedback de cópia/salvamento. */
+.profile-card .card-actions button[data-build-profile]{background:#235d48;border-color:#235d48;color:#fff;flex:1 1 100%;min-height:44px}
+.profile-card .card-actions button[data-ai-json-profile]{flex:1 1 100%;min-height:43px}
+.profile-card .card-actions button[data-share-profile]{min-height:42px}
+.builder-action-status:not(:empty){display:block;margin:-9px 0 15px;padding:11px 14px;border-radius:7px;background:#e9f5ed;color:#1b6246;font-size:12px;font-weight:700;line-height:1.6}
+.builder-share-panel{background:#f1f7fa;border:1px solid #cedde7;padding:12px;border-radius:9px;margin:-7px 0 17px;font-size:11px;color:#35566b}
+.builder-share-panel[hidden],.json-assistant-manual-wrap[hidden]{display:none}
+.builder-share-panel label{display:block;margin-bottom:8px;font-weight:700;line-height:1.5}
+.builder-share-panel>div{display:flex;gap:9px}
+.builder-share-panel input{flex:1;min-width:0;border:1px solid #afc4cf;border-radius:6px;padding:10px;background:white;color:#294e64;font-size:11px}
+.builder-share-panel button{border:1px solid #2f7089;border-radius:6px;background:#2f7089;color:white;font-weight:800;padding:10px 13px;white-space:nowrap}
+#json-assistant-copy-status:not(:empty){background:#e8f6ef;border-left:3px solid #329a6e;padding:10px 12px;border-radius:4px;color:#1d6447}
+.json-assistant-manual-wrap{display:flex;flex-direction:column;gap:7px;background:#fff9ed;border:1px solid #eccf96;padding:12px;border-radius:9px}
+.json-assistant-manual-wrap label{font-size:11px;line-height:1.65;color:#745524}
+.json-assistant-manual-wrap textarea{height:160px;resize:vertical;min-width:0;width:100%;border:1px solid #d9bc84;border-radius:7px;padding:10px;font:11px/1.6 ui-monospace,Consolas,monospace;color:#2d3c4b;background:white}
+@media(max-width:580px){.builder-share-panel>div{flex-direction:column}.builder-share-panel button{width:100%}.json-assistant-actions button{width:100%}}
