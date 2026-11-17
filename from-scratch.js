@@ -41,7 +41,7 @@
  const cpuID=()=>choiceRow(0)?.id;
  const boardID=()=>choiceRow(1)?.id;
  const getSocket=()=>socket[cpuID()]||'AM5';
- const ramDDR=()=>boardID()==='mb-gigabyte-b760m-gaming-ddr4'||getSocket()==='AM4'?'DDR4':'DDR5';
+ const ramDDR=()=>{if(boardID()?.startsWith('manual')&&getSocket()==='LGA1700')return null;return boardID()==='mb-gigabyte-b760m-gaming-ddr4'||getSocket()==='AM4'?'DDR4':'DDR5'};
  const hasIGPU=()=>!noIGPU.has(cpuID());
  function bestIndex(list,stage){const goal=selected[0]?.value?.id||'equilibrio';if(stage===0){if(goal==='intenso')return list.findIndex(x=>x.id==='cpu-amd-r7-9700x'||x.id==='cpu-u7-265k'||x.id==='cpu-r7-5700x');if(goal==='economia')return 0;return list.findIndex(x=>x.id==='cpu-amd-r5-9600x'||x.id==='cpu-u5-245k'||x.id==='cpu-r7-5700g');}if(stage===1)return 0;if(stage===2)return list.findIndex(x=>goal==='intenso'?x.id==='ram-teamgroup-expert-ddr5-64gb'||x.id==='ram-kingston-fury-rgb-ddr4-64gb':x.id==='ram-teamgroup-vulcan-eco-ddr5-32gb'||x.id==='ram-lexar-ddr4-16gb');if(stage===3)return goal==='intenso'?list.findIndex(x=>x.id==='ssd-kingston-nv2-2tb'):0;if(stage===4)return goal==='intenso'?list.findIndex(x=>x.id==='gpu-gigabyte-rtx-5060-ti-16'):goal==='economia'&&hasIGPU()?list.findIndex(x=>x.id==='integrated'):list.findIndex(x=>x.id==='gpu-galax-rtx5060-8gb');if(stage===5)return goal==='intenso'?1:0;if(stage===6)return goal==='intenso'?1:0;return goal==='intenso'?1:0;}
  function choicesFor(stage){let idsFor=[];
@@ -54,9 +54,9 @@
  else if(stage===6)idsFor=extra.cooler;
  else idsFor=extra.case;
  let opts=idsFor.map(current).filter(x=>product(x.id));
- if(stage===4&&hasIGPU())opts=[{type:'included',id:'integrated'},...opts.slice(0,2)];
+ if(stage===4&&hasIGPU()){const goal=selected[0]?.value?.id;opts=[{type:'included',id:'integrated'},...(goal==='intenso'?[current('gpu-galax-rtx5060-8gb'),current('gpu-gigabyte-rtx-5060-ti-16')]:opts.slice(0,2))];}
  if(stage===4&&!hasIGPU())opts=opts.slice(0,3);
- if(stage===2&&ramDDR()==='DDR4')opts=opts.slice(0,3);
+ if(stage===2&&!ramDDR()){opts=[current('ram-lexar-ddr4-16gb'),current('ram-teamgroup-vulcan-eco-ddr5-32gb'),{type:'manual',id:'manual-ram'}];}if(stage===2&&ramDDR()==='DDR4')opts=opts.slice(0,3);
  if(stage===2&&ramDDR()==='DDR5')opts=opts.slice(0,3);
  if(stage===1&&opts.length===1)opts.push({type:'manual',id:'manual-board'});
  if(opts.length<2)opts.push({type:'manual',id:'manual-'+stage});
