@@ -72,7 +72,7 @@ A primeira modernização acrescentou **seis peças alternativas** ao catálogo 
 - O alerta automático de socket e DDR é preliminar; confirme BIOS, QVL, fonte, medidas e conectores com os fabricantes. Caso haja item sem preço, o total é exibido como **Preço pendente**, não falsamente como custo completo.
 - **Salvar no navegador** usa `localStorage` (até 30 perfis por navegador, sem cadastro). **Compartilhar** utiliza um link que carrega o próprio perfil, incluindo valores informados. **Baixar** gera JSON (backup / transferência) ou CSV (orçamento), ou abre a impressão para salvar em PDF. Sem coleta de dados pessoais em servidor.
 - Importar JSON é possível em **Meus perfis**; a importação valida o formato e os oito grupos de peças.
-- Fonte de pesquisa adicional: [SeuHardware](https://seuhardware.com/), com links específicos para as oito categorias. Como o SeuHardware se define como plataforma de publicidade e não loja, a referência é editorial; comprador deve conferir preço, SKU, vendedor e estoque no varejista.
+- Fonte de pesquisa adicional: [SeuHardware](https://seuhardware.com/), disponível na seção de fontes do site, sem atalhos repetidos em cada peça do montador. Como o SeuHardware se define como plataforma de publicidade e não loja, a referência é editorial; comprador deve conferir preço, SKU, vendedor e estoque no varejista.
 
 ### Testes sugeridos
 
@@ -123,3 +123,14 @@ Na última etapa, **Confirmar e abrir montador** transfere as escolhas para `bui
 **QA antes de publicar:** executar `node --check from-scratch.js` e `builder.js`, e `python test_scratch.py`; testar as 11 etapas em 320, 390, 768 e 1440px e o cenário Intel i5-14400 com placa LGA1700 e RAM DDR4. Confirmar que nenhuma etapa passa sem seleção, total com pendência não é falseado, montador recebe oito componentes e não há erros JS ou overflow.
 
 **Decisões especiais do assistente:** para uso intenso com IA, a recomendação gráfica entre as três opções é uma placa dedicada de 16 GB, não vídeo integrado. No Intel LGA1700 com placa-mãe informada manualmente, o padrão DDR4/DDR5 não é presumido: o usuário precisa confirmar o padrão na loja antes de fechar a montagem.
+
+
+## Copiar JSON para uma IA e colar configurações — 16/11/2026
+
+Cada um dos **22 perfis** agora possui botão **JSON para IA**, também disponível no detalhamento. Ele abre uma janela que explica o que está acontecendo e oferece duas alternativas: copiar somente o JSON ou copiar um pedido em linguagem simples com o JSON, incluindo solicitação de análise técnica (CPU/placa-mãe/DDR, GPU, refrigeração, fonte, gabinete, SSD, vantagens, limitações e custo-benefício). Nada é enviado automaticamente a plataformas externas. Caso a área de transferência do navegador não esteja disponível, o texto é selecionado para cópia manual.
+
+O mesmo painel fica acessível pelo botão **Copiar / colar JSON para IA** dentro de montagens personalizadas ou criadas do zero. É possível **colar um JSON completo**, inclusive envolto em bloco de código Markdown, conferir o formato e abrir no montador após confirmação explícita. A importação verifica identificador de perfil, oito categorias, quantidade, preços e campos essenciais. Nomes ou preços alterados no JSON passam a ser identificados como **não verificados**, em vez de herdar indevidamente a fonte do preço anterior. Perfis salvos em navegador não são apagados pela importação. O formato permanece compatível com o download JSON existente (`v:1`, `baseId`, `rows`, `assembly`, `name`).
+
+**Limpeza de interface solicitada:** foram retirados botões repetitivos de pesquisa no SeuHardware do editor de peças e os atalhos WAZ/Google Shopping de dentro das etapas do assistente. A informação longa de “Antes de comprar” foi retirada do bloco lateral; permanecem avisos de compatibilidade e de que os valores são referências, em pontos relevantes. As lojas continuam acessíveis na seção de fontes e referências.
+
+**QA:** `node --check` de app.js, builder.js, from-scratch.js e json-assistant.js; testes funcionais Chromium via scripts injetados, em 320/390/768/1440 px, para copiar pergunta + JSON, analisar formato, rejeitar texto inválido, alterar preço via JSON, importar e abrir montador, abrir novamente a cópia de uma montagem personalizada e confirmar ausência de rolagem horizontal e exceções JS. As 22 montagens e os 72 produtos foram preservados sem alterar os preços.
