@@ -8,18 +8,18 @@
  function byProfile(id){
   const p=DATA?.profiles.find(x=>x.id===id);if(!p)throw Error('Não encontramos esse computador no catálogo.');
   return {v:1,baseId:p.id,name:`Meu perfil — ${p.title}`,assembly:p.pricing.assembly??250,
-   rows:[...p.pricing.items.map(r=>({label:r.label,name:r.name,qty:r.qty,unitPrice:r.unitPrice,source:r.source||'Pesquisa editorial',url:r.url||'',date:p.pricing.date||DATA.meta.pricingDate||'',productId:null,manual:false,kind:r.kind||'referencia'})),COMPAT.optionalFan()],
+   rows:[...p.pricing.items.map(r=>({label:r.label,name:r.name,qty:r.qty,unitPrice:r.unitPrice,source:r.source||'Pesquisa editorial',url:r.url||'',date:p.pricing.date||DATA.meta.pricingDate||'',productId:null,manual:false,kind:r.kind||'referencia'})),COMPAT.optionalFan(),COMPAT.optionalPaste()],
    updatedAt:new Date().toISOString(),contexto:{finalidade:'Fotografia: Lightroom, Photoshop, Capture One e arquivos RAW',plataforma:p.platform,nivel:p.level,tipoDeVideo:p.gpuType,recomendacaoOriginal:p.why||'',cuidados:p.warning||'',pesquisaEditorial:p.pricing.date||DATA.meta.pricingDate||'',precificacao:'Valores editoriais de referência, não cotações ao vivo'}};
  }
  function normalize(data){
   if(!data||typeof data!=='object'||data.v!==1||typeof data.baseId!=='string')throw Error('O texto não é um JSON de montagem da Estação RAW. Use o botão de copiar JSON para começar.');
   const p=DATA?.profiles.find(x=>x.id===data.baseId);
   if(!p)throw Error('Esta configuração usa um perfil de base que não existe mais no catálogo.');
-  if(!Array.isArray(data.rows)||![8,9].includes(data.rows.length))throw Error('O JSON deve conter os 8 componentes principais (ou 9 incluindo ventoinhas extras).');
-  const upgraded=[...data.rows];if(!upgraded.some(r=>r?.label==='Ventoinhas extras do gabinete'))upgraded.push(COMPAT.optionalFan());
-  if(new Set(upgraded.map(r=>r?.label)).size!==9||labels.some(label=>!upgraded.some(r=>r?.label===label)))throw Error('Cada categoria deve aparecer uma vez: cooler do processador, gabinete e ventoinhas extras separados.');
+  if(!Array.isArray(data.rows)||![8,9,10].includes(data.rows.length))throw Error('O JSON deve conter os 8 componentes principais (ou 9/10 incluindo opcionais de ventoinhas e pasta térmica).');
+  const upgraded=[...data.rows];if(!upgraded.some(r=>r?.label==='Ventoinhas extras do gabinete'))upgraded.push(COMPAT.optionalFan());if(!upgraded.some(r=>r?.label==='Pasta térmica'))upgraded.push(COMPAT.optionalPaste());
+  if(new Set(upgraded.map(r=>r?.label)).size!==10||labels.some(label=>!upgraded.some(r=>r?.label===label)))throw Error('Cada categoria deve aparecer uma vez: cooler do processador, gabinete, ventoinhas e pasta térmica separados.');
   if(typeof data.name!=='string'||!data.name.trim()||data.name.length>160||typeof data.assembly!=='number'||!Number.isFinite(data.assembly)||data.assembly<0||data.assembly>100000)throw Error('Confira o nome do perfil e o valor da montagem.');
-  const baseRows=Object.fromEntries([...p.pricing.items,COMPAT.optionalFan()].map(r=>[r.label,r]));
+  const baseRows=Object.fromEntries([...p.pricing.items,COMPAT.optionalFan(),COMPAT.optionalPaste()].map(r=>[r.label,r]));
   const rows=upgraded.map(r=>{
    if(typeof r.name!=='string'||r.name.length>260||!Number.isInteger(r.qty)||r.qty<0||r.qty>8||!(r.unitPrice===null||(typeof r.unitPrice==='number'&&Number.isFinite(r.unitPrice)&&r.unitPrice>=0&&r.unitPrice<=1000000)))throw Error('Há uma peça com nome, quantidade ou preço inválido.');
    const base=baseRows[r.label];const edited=!!r.manual||r.name!==base.name||r.unitPrice!==base.unitPrice;

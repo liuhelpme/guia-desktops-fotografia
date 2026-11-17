@@ -2,10 +2,11 @@
 /* Compatibilidade preliminar de hardware, não substitui BIOS/QVL/especificações do fabricante. */
 (()=>{
  const norm=s=>String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
- const categoryFor={'Processador':'Processador','Placa-mãe':'Placa-mãe','Memória RAM':'Memória RAM','SSD / armazenamento':'Armazenamento','Placa de vídeo':'Placa de vídeo','Fonte':'Fonte','Cooler':'Cooler','Gabinete':'Gabinete','Ventoinhas extras do gabinete':'Ventoinhas do gabinete'};
- const baseLabels=Object.keys(categoryFor).filter(x=>x!=='Ventoinhas extras do gabinete');
+ const categoryFor={'Processador':'Processador','Placa-mãe':'Placa-mãe','Memória RAM':'Memória RAM','SSD / armazenamento':'Armazenamento','Placa de vídeo':'Placa de vídeo','Fonte':'Fonte','Cooler':'Cooler','Gabinete':'Gabinete','Ventoinhas extras do gabinete':'Ventoinhas do gabinete','Pasta térmica':'Pasta térmica'};
+ const baseLabels=Object.keys(categoryFor).filter(x=>!['Ventoinhas extras do gabinete','Pasta térmica'].includes(x));
  const allLabels=Object.keys(categoryFor);
  const optionalFan=()=>({label:'Ventoinhas extras do gabinete',name:'Nenhuma ventoinha extra — verificar as que já acompanham o gabinete',qty:0,unitPrice:0,source:'Opcional: nenhum custo adicional',url:'',date:'',productId:'custom',manual:false,kind:'opcional'});
+ const optionalPaste=()=>({label:'Pasta térmica',name:'Verificar pasta já aplicada no cooler — nenhuma compra extra',qty:0,unitPrice:0,source:'Opcional: confira se já acompanha o cooler',url:'',date:'',productId:'custom',manual:false,kind:'opcional'});
  function cpuSocket(s){const t=norm(s);if(/core\s*ultra|\b[234]\d{2}k(?:f)?\b|lga.?1851/.test(t))return 'LGA1851';const intel=t.match(/\bi[3579][ -]?(\d{4,5})(?:f|kf|k|t)?\b/);if(intel){const x=Number(intel[1]);return x>=12000?'LGA1700':'LGA1200';}const ryzen=t.match(/ryzen\s*[3579]\s*([35789]\d{3})(?:x3d|gt|g|x|f)?\b/);if(ryzen)return Number(ryzen[1])>=7000?'AM5':'AM4';const q=t.match(/\b(am4|am5|lga\s*1851|lga\s*1700|lga\s*1200)\b/);return q?q[1].replace(/\s/g,'').toUpperCase():null;}
  function boardSocket(s){const t=norm(s);if(/\b(a520|b450|b550|x570)[a-z0-9-]*\b/.test(t))return 'AM4';if(/\b(a620|b650|b850|x670|x870)[a-z0-9-]*\b/.test(t))return 'AM5';if(/\b(b560|z590|h510)[a-z0-9-]*\b/.test(t))return 'LGA1200';if(/\b(b760|z790|h610|b660|z690)[a-z0-9-]*\b/.test(t))return 'LGA1700';if(/\b(b860|z890|h810)[a-z0-9-]*\b/.test(t))return 'LGA1851';const q=t.match(/\b(am4|am5|lga.?1851|lga.?1700|lga.?1200)\b/);return q?q[1].replace(/\s/g,'').toUpperCase():null;}
  function boardDDR(s){const sock=boardSocket(s);if(['AM4','LGA1200'].includes(sock))return 'DDR4';if(['AM5','LGA1851'].includes(sock))return 'DDR5';if(/ddr\s*4/i.test(s))return 'DDR4';if(/ddr\s*5/i.test(s))return 'DDR5';return null;}
@@ -21,9 +22,10 @@
  }
  function dedicated(r){return !!(r&&r.qty>0&&r.name&&!/^\s*(integrado|nenhuma|sem placa|pesquisar|peça a escolher|placa de v[ií]deo obrigat[oó]ria|selecione)\b/i.test(r.name));}
  function wrongManualCategory(label,name){const t=norm(name);if(!t||/pesquisar|nenhuma|peça a escolher/.test(t))return false;
-  if(label==='Cooler'&&/\b(gabinete|mid[- ]?tower|full[- ]?tower|mini[- ]?tower|case gamer|kit \d+ ventoinhas|fan de gabinete)\b/.test(t))return true;
+  if(label==='Cooler'&&/\b(gabinete|mid[- ]?tower|full[- ]?tower|mini[- ]?tower|case gamer|kit \d+ ventoinhas|fan de gabinete|pasta termica|mastergel|cryofuze)\b/.test(t))return true;
   if(label==='Gabinete'&&/\b(cooler de processador|air cooler|ag400|ag620|ak400|ak620|sickleflow|ventoinha avulsa|kit \d+ ventoinhas)\b/.test(t))return true;
-  if(label==='Ventoinhas extras do gabinete'&&/\b(gabinete|mid[- ]?tower|air cooler|cooler de processador|ag400|ag620|ak400|ak620|sistema de refrigeracao liquida)\b/.test(t))return true;
+  if(label==='Ventoinhas extras do gabinete'&&/\b(gabinete|mid[- ]?tower|air cooler|cooler de processador|ag400|ag620|ak400|ak620|sistema de refrigeracao liquida|pasta termica)\b/.test(t))return true;
+  if(label==='Pasta térmica'&&/\b(gabinete|mid[- ]?tower|air cooler|ventoinha|fan de gabinete|ag400|ag620|ak400|ak620|memoria ram)\b/.test(t))return true;
   return false;
  }
  function eligible(row,rows,products){const desired=categoryFor[row.label];if(!desired)return [];
@@ -33,7 +35,9 @@
    if(row.label==='Processador'&&board){const cs=cpuSocket(p.name);return cs===board;}
    if(row.label==='Placa-mãe'&&socket){const bs=boardSocket(p.name);return bs===socket;}
    if(row.label==='Memória RAM'&&ddr)return new RegExp(ddr,'i').test(p.name);
+   if(row.label==='Cooler'&&p.id==='cooler-amd-wraith-stealth-box')return /ryzen\s*[357]\s*(5600|5600g|5600gt|5700g)\b/i.test(cpu?.name||'')&&!/5700x|5800x/i.test(cpu?.name||'');
    if(row.label==='Cooler'&&socket==='LGA1851')return /\bag400\s*g2\b/i.test(p.name)||/lga.?1851/i.test(p.name); // Apenas modelos declarados para LGA1851.
+   if(row.label==='SSD / armazenamento'){const k=/\b(sata|2[.,]5)\b/i.test(row.name)?'SATA':/\b(nvme|m[.]?2|sn580|sn770|nv3|nv2|legend|nm790)\b/i.test(row.name)?'NVME':null;if(k==='SATA'&&!/\b(sata|2[.,]5)\b/i.test(p.name))return false;if(k==='NVME'&&!/\b(nvme|m[.]?2|sn580|sn770|nv3|nv2|legend|nm790)\b/i.test(p.name))return false;} 
    return true;
   });
  }
@@ -49,6 +53,8 @@
   if(cg===null&&!dedicated(gpu))notes.push('Não foi possível confirmar se este processador produz imagem: confirme no fabricante ANTES de retirar a placa de vídeo.');
   if(gpu&&gpu.qty>0&&/pesquisar|peça a escolher/i.test(gpu.name))hard.push('Escolha um modelo de placa de vídeo válido.');
   if(gpu&&gpu.qty>0&&!/^\s*integrado/i.test(gpu.name))notes.push('Confirme fonte, conectores elétricos e espaço físico para a placa de vídeo escolhida.');
+  const paste=heads['Pasta térmica'];if(paste?.qty===0)notes.push('Pasta térmica: confirme se já vem aplicada no cooler ou incluída na embalagem. Se não vier, compre uma seringa adequada; não aplique duas camadas.');
+  const cooler=heads['Cooler'];if(cooler?.productId==='cooler-amd-wraith-stealth-box'&&!/ryzen\s*[357]\s*(5600|5600g|5600gt|5700g)\b/i.test(cpu?.name||''))hard.push('Cooler BOX Wraith Stealth só pode ser considerado sem custo se acompanhar esse processador. Verifique o conteúdo real da caixa.');
   if(fan?.qty>0)notes.push('Ventoinhas extras: confira quantas o gabinete já inclui, posições 120/140 mm, conectores PWM e, se houver luzes, ARGB 5 V vs RGB 12 V. Kits 3x contam como UM kit no orçamento.');
   for(const r of rows)if(wrongManualCategory(r.label,r.name))hard.push(`A peça “${r.name}” parece estar na categoria errada: ${r.label}. Escolha uma peça adequada a esse campo.`);
   return {hard,notes,cpuHasGraphics:cg,gpuRequired:cg===false};
@@ -73,5 +79,5 @@
   const weighted=x=>x.bestPrice*(x.lastResearchDate==='2026-11-17'?1:x.lastResearchDate==='2026-11-16'?1.06:1.14);
   return list.sort((a,b)=>weighted(a)-weighted(b)||(b.lastResearchDate||'').localeCompare(a.lastResearchDate||'')).slice(0,3);
  }
- window.EstacaoCompat=Object.freeze({norm,categoryFor,baseLabels,allLabels,optionalFan,cpuSocket,boardSocket,boardDDR,cpuGraphics,dedicated,eligible,review,wrongManualCategory,recommendation});
+ window.EstacaoCompat=Object.freeze({norm,categoryFor,baseLabels,allLabels,optionalFan,optionalPaste,cpuSocket,boardSocket,boardDDR,cpuGraphics,dedicated,eligible,review,wrongManualCategory,recommendation});
 })();
