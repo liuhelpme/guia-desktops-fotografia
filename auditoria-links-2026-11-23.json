@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-23",
+  "scope": "Amostra restrita; NÃO representa auditoria integral de 141 registros nem atualização de preços dos 22 perfis",
+  "catalog": {
+    "profiles": 22,
+    "products": 89,
+    "offerRecords": 141,
+    "individuallyCheckedExistingOfferLinks": 0,
+    "newCandidateProductPagesChecked": 2
+  },
+  "checks": [
+    {
+      "url": "https://www.pichau.com.br/memoria-kingston-fury-beast-32gb-2x16gb-ddr5-6000mhz-c30-preto-kf560c30bbk2-32",
+      "date": "2026-11-23",
+      "result": "pagina_produto_acessivel",
+      "sku": "KF560C30BBK2-32",
+      "model": "Kingston Fury Beast 32GB (2x16GB) DDR5-6000 CL30 XMP",
+      "pixPriceBRL": 1059.99,
+      "priceType": "preço anunciado no PIX observado na página, não preço vivo",
+      "stock": "não confirmado em checkout",
+      "freight": "não calculado",
+      "source": "Pichau",
+      "catalogMatch": "Variante não idêntica às ofertas atuais do produto genérico; não substituir silenciosamente",
+      "evidence": "Página de produto abriu com SKU, preço PIX e descrição dos módulos; disponibilidade para CEP e checkout não testados"
+    },
+    {
+      "url": "https://www.terabyteshop.com.br/produto/43745/placa-de-video-zotac-gaming-nvidia-geforce-rtx-5060-twin-edge-oc-8gb-gddr7-dlss-ray-tracing-zt-b50600h-10a",
+      "date": "2026-11-23",
+      "result": "pagina_produto_acessivel",
+      "sku": "ZT-B50600H-10A",
+      "model": "Zotac RTX 5060 Twin Edge OC 8GB GDDR7",
+      "pixPriceBRL": 3159.99,
+      "priceType": "preço anunciado à vista PIX/boleto observado na página, não preço vivo",
+      "stock": "página mostra pronta entrega; estoque real no checkout não confirmado",
+      "freight": "anúncio apresenta frete grátis para estados selecionados; CEP não validado",
+      "source": "TerabyteShop",
+      "catalogMatch": "Produto diferente da Galax RTX 5060 atual; alternativa documental, não substituição",
+      "evidence": "Página específica com código, valor, 8GB VRAM, recomendação de fonte 550W, 1x8 pinos, comprimento 220,5mm"
+    }
+  ],
+  "decisions": [
+    "Não alterar preços de data.json, CSVs nem totais sem auditoria de todos os itens envolvidos e QA integral.",
+    "Não declarar estoque ou frete confirmados por leitura da página.",
+    "Preservar 22 perfis, 89 produtos e histórico; não adicionar perfil novo sem custo completo.",
+    "QA de builder.js/from-scratch.js/JSON/CSV/clipboard/mobile não executada nesta amostra; publicação bloqueada.",
+    "Manter produção intacta e aprofundar auditoria de links e compatibilidade antes de qualquer merge."
+  ],
+  "baselineProductionCommit": "0d3f60231377c2c25889b927cda5d1d48fd1de79"
+}
